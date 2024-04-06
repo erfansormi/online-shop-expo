@@ -1,0 +1,21 @@
+{
+  // "compilerOptions": {
+  //   "paths": {
+  //     "@/*": [
+  //       "./*"
+  //     ]
+  //   }
+  // },
+  "compilerOptions": {
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "types": [
+      "node"
+    ]
+  },
+  "extends": "@tsconfig/react-native/tsconfig.json"
+  // "extends": "expo/tsconfig.base"
+}
