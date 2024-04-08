@@ -23,7 +23,7 @@ const Input = forwardRef<TextInput, Props & TextInputProps>(
       fontFamily = "vazir",
       ...props
     },
-    ref,
+    ref
   ) => {
     return (
       <View>
@@ -47,14 +47,14 @@ const Input = forwardRef<TextInput, Props & TextInputProps>(
 
         <View className="mt-1 h-5">
           {error && (
-            <Text size="xs" className="text-red-500">
+            <Text style={{ fontSize: 11 }} className="text-red-500">
               {error}
             </Text>
           )}
         </View>
       </View>
     );
-  },
+  }
 );
 
 Input.displayName = "Input";

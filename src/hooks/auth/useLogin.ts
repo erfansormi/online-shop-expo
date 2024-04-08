@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { router } from "expo-router";
 import { login } from "@/services/auth";
 import { useForm } from "react-hook-form";
 import * as SecureStore from "expo-secure-store";
-import { useLinkTo } from '@react-navigation/native';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "react-native-toast-notifications";
 import { loginSchema, LoginSchemaData } from "@/utils/schemas";
-import { router } from "expo-router";
+import { useUserStore } from "@/store/user-store";
 
 export const useLogin = () => {
     const toast = useToast()
+    const { setUser } = useUserStore()
     const [loading, setLoading] = useState(false);
     const form = useForm<LoginSchemaData>({ resolver: zodResolver(loginSchema) });
 
@@ -17,6 +18,7 @@ export const useLogin = () => {
         setLoading(true);
         login(data)
             .then((res) => {
+                setUser(res.data)
                 SecureStore.setItem("token", res.data.token);
                 toast.show("ورود با موفقیت انجام شد", { type: "success" });
                 router.push("/");

@@ -21,5 +21,5 @@ export const useIsAuthenticated = () => {
             setUser(user.data)
         }
         fetchData()
-    }, [token, rootNavigationState])
+    }, [token, rootNavigationState?.key])
 }

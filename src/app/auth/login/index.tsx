@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import Text from "@/components/ui/text";
 import Input from "@/components/ui/input";
 import Button from "@/components/ui/button";
 import Container from "@/components/common/container";
 import { Controller } from "react-hook-form";
 import { useLogin } from "@/hooks/auth/useLogin";
-import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TextInput,
+  View,
+} from "react-native";
+import { Link } from "expo-router";
 
 const Login = () => {
   const { form, loading, onSubmit } = useLogin();
@@ -15,16 +22,20 @@ const Login = () => {
     handleSubmit,
   } = form;
 
+  const passwordRef = useRef<TextInput>(null);
+
   return (
-    <Container>
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <KeyboardAvoidingView
-          behavior={"padding"}
-          className="flex-1 justify-center"
-          keyboardVerticalOffset={Platform.OS === "android" ? 75 : 0}
-          contentContainerStyle={{ flex: 1, justifyContent: "center" }}
+    <Container screenHeight>
+      <KeyboardAvoidingView
+        behavior={"padding"}
+        className="flex-1 justify-center"
+        contentContainerStyle={{ flex: 1, justifyContent: "center" }}
+      >
+        <ScrollView
+          keyboardShouldPersistTaps={"handled"}
+          showsVerticalScrollIndicator={false}
         >
-          <View className="w-full">
+          <View className="w-full min-h-screen justify-center">
             {/* TITLE */}
             <Text
               size="3xl"
@@ -38,47 +49,63 @@ const Login = () => {
               ورود
             </Text>
 
-            {/* EMAIL */}
-            <View>
-              <Controller
-                name="email"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <Input
-                    value={value}
-                    onChange={onBlur}
-                    onChangeText={onChange}
-                    label="ایمیل"
-                    inputMode="email"
-                    autoComplete="email"
-                    placeholder="ایمیل خود را وارد کنید"
-                    error={errors.email && errors.email.message}
-                  />
-                )}
-              />
+            <View style={{ gap: 8, marginBottom: 12 }}>
+              {/* EMAIL */}
+              <View>
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <Input
+                      value={value}
+                      onSubmitEditing={() => passwordRef.current?.focus()}
+                      returnKeyType="next"
+                      onChange={onBlur}
+                      onChangeText={onChange}
+                      label="ایمیل"
+                      inputMode="email"
+                      autoComplete="email"
+                      placeholder="ایمیل خود را وارد کنید"
+                      error={errors.email && errors.email.message}
+                    />
+                  )}
+                />
+              </View>
+
+              {/* PASSWORD */}
+              <View>
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <Input
+                      ref={passwordRef}
+                      value={value}
+                      onChange={onBlur}
+                      onChangeText={onChange}
+                      label="پسورد"
+                      secureTextEntry
+                      autoComplete="password"
+                      placeholder="رمز عبور خود را وارد کنید"
+                      error={errors.password && errors.password.message}
+                    />
+                  )}
+                />
+              </View>
+            </View>
+            {/* LINK TO SIGNUP */}
+            <View className="flex-row items-center" style={{ gap: 8 }}>
+              <Text style={{ fontSize: 15 }}>حساب کاربری ندارید؟</Text>
+              <Link
+                href={"/auth/signup"}
+                className="text-cyan-500"
+                style={{ fontFamily: "vazir", fontSize: 15 }}
+              >
+                ثبت نام در بهمان کالا
+              </Link>
             </View>
 
-            {/* PASSWORD */}
-            <View>
-              <Controller
-                name="password"
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    value={value}
-                    onChange={onBlur}
-                    onChangeText={onChange}
-                    label="پسورد"
-                    secureTextEntry
-                    autoComplete="password"
-                    placeholder="رمز عبور خود را وارد کنید"
-                    error={errors.password && errors.password.message}
-                  />
-                )}
-              />
-            </View>
-
-            <View className="pt-3">
+            <View className="pt-4">
               <Button
                 touchableProps={{
                   onPress: handleSubmit(onSubmit),
@@ -90,8 +117,8 @@ const Login = () => {
               </Button>
             </View>
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Container>
   );
 };
