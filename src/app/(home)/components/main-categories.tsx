@@ -17,7 +17,7 @@ const MainCategories = () => {
           numColumns={5}
           data={mainCategories}
           renderItem={({ item }) => (
-            <View key={item.id} className="mb-6 w-[116px] items-center">
+            <View key={item.id} className="mb-3 w-[116px] items-center">
               <Image width={80} height={80} source={{ uri: item.image }} />
               <Text size="2xs">{item.title}</Text>
             </View>

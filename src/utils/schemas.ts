@@ -23,7 +23,6 @@ export const signupSchema = z.object({
         .min(3, errorMessages.minLength("نام خانوادگی", 3))
         .trim(),
 })
-    .refine(data => data.password !== data.confirmPassword, { message: "رمز عبور های وارد شده یکسان نیستند!", path: ["confirmPassword"] });
 export type SignupSchemaData = z.infer<typeof signupSchema>;
 
 // LOGIN

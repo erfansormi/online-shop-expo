@@ -1,14 +1,16 @@
-import { StatusBar, View, ViewProps } from "react-native";
+import { Dimensions, StatusBar, View, ViewProps } from "react-native";
 import React, { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
+  screenHeight?: boolean;
   withStatusBarOffset?: boolean;
 }
 
 const Container = ({
   children,
   withStatusBarOffset = false,
+  screenHeight = false,
   style,
   ...props
 }: Props & ViewProps) => {
@@ -16,7 +18,10 @@ const Container = ({
     <View
       className="flex-1 px-4"
       style={[
-        { paddingTop: withStatusBarOffset ? StatusBar.currentHeight : 0 },
+        {
+          paddingTop: withStatusBarOffset ? StatusBar.currentHeight : 0,
+          height: screenHeight ? Dimensions.get("screen").height : "auto",
+        },
         style,
       ]}
       {...props}

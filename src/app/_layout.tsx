@@ -5,11 +5,15 @@ import { I18nManager } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import ToastProvider from "@/libs/toast-provider";
 import { useIsAuthenticated } from "@/hooks/auth/useIsAuthenticated";
+import { SWRConfig } from "swr";
+import axiosInstance from "@/libs/axios";
 
 const isLoggedIn = SecureStore.getItem("token");
 export const unstable_settings = {
   initialRouteName: isLoggedIn ? "(home)/index" : "auth/login/index",
 };
+
+const fetcher = (url: string) => axiosInstance.get(url).then((res) => res.data);
 
 const Layout = () => {
   useIsAuthenticated();
@@ -25,17 +29,19 @@ const Layout = () => {
 
   if (!fontsLoaded) return null;
   return (
-    <ToastProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: "#fff" },
-          navigationBarColor: "#fff",
-          statusBarColor: "#fff",
-          statusBarStyle: "dark",
-        }}
-      />
-    </ToastProvider>
+    <SWRConfig value={{ errorRetryCount: 10, fetcher }}>
+      <ToastProvider>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "#fff" },
+            navigationBarColor: "#fff",
+            statusBarColor: "#fff",
+            statusBarStyle: "dark",
+          }}
+        />
+      </ToastProvider>
+    </SWRConfig>
   );
 };
 

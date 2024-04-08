@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { TouchableNativeFeedback, View } from "react-native";
 import Text from "@/components/ui/text";
 import {
   FontAwesome5,

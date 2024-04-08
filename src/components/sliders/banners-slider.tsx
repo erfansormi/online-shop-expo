@@ -9,7 +9,7 @@ interface Props {
 
 const BannersSlider = ({ images }: Props) => {
   return (
-    <View className="mb-3">
+    <View>
       <Swiper
         loop
         autoplay

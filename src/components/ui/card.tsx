@@ -1,4 +1,4 @@
-import { View, Text, ViewProps } from "react-native";
+import { View, ViewProps } from "react-native";
 
 const Card = ({ style, ...props }: ViewProps) => {
   return (

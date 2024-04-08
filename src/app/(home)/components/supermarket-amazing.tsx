@@ -6,7 +6,7 @@ import DiscountPercentage from "@/components/common/discount-percentage";
 
 const SupermarketAmazing = () => {
   return (
-    <View className="mx-3 mb-3 rounded-lg bg-slate-100 p-5">
+    <View className="mx-3 rounded-lg bg-slate-100 p-5">
       <View className="flex-row items-center">
         <Image
           width={50}

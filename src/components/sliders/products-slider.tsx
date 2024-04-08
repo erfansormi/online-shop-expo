@@ -11,7 +11,7 @@ interface Props {
 
 const ProductsSlider = ({ products }: Props) => {
   return (
-    <View className="mb-3 bg-primary py-2">
+    <View className="bg-primary py-2">
       <FlatList
         horizontal
         data={products}

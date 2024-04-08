@@ -4,6 +4,7 @@ import Modal from "@/components/ui/modal";
 import Button from "@/components/ui/button";
 import * as SecureStore from "expo-secure-store";
 import { useToast } from "react-native-toast-notifications";
+import { router } from "expo-router";
 
 interface Props {
   open: boolean;
@@ -16,6 +17,8 @@ const LogoutModal = ({ open, setOpen }: Props) => {
   const logout = async () => {
     await SecureStore.deleteItemAsync("token").then(() => {
       toast.show("خروج با موفقیت انجام شد");
+      setOpen(false);
+      router.push("/auth/login");
     });
   };
 

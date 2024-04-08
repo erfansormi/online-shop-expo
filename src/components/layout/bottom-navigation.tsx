@@ -8,63 +8,19 @@ import { BottomNavigationHeight } from "@/utils/constants/styles";
 const BottomNavigation = () => {
   const pathname = usePathname();
 
-  const tabs = [
-    {
-      link: "/",
-      title: "خانه",
-      icon: (
-        <Ionicons
-          name="home-outline"
-          size={24}
-          color={pathname === "/" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
-        />
-      ),
-    },
-    {
-      link: "/products",
-      title: "محصولات",
-      icon: <CategoryIcon />,
-    },
-    {
-      link: "/cart",
-      title: "سبد خرید",
-      icon: (
-        <Ionicons
-          name="cart-outline"
-          size={26}
-          color={pathname === "cart" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
-        />
-      ),
-    },
-    {
-      link: "/profile/personal-info",
-      title: "پروفایل",
-      icon: (
-        <FontAwesome5
-          name="user"
-          size={20}
-          color={
-            pathname === "/profile/personal-info"
-              ? "rgb(244 63 94)"
-              : "rgb(107, 114, 128)"
-          }
-        />
-      ),
-    },
-  ];
-
   return (
     <View
       style={{ height: BottomNavigationHeight }}
       className="absolute bottom-0 left-0 right-0 border-t-2 border-t-gray-200 bg-white"
     >
       <View className="flex-row pt-3">
-        {tabs.map((item) => (
+        {tabs(pathname).map((item) => (
           <TouchableOpacity
-            onPress={() => router.push(item.link)}
+            key={item.link}
             className="w-1/4"
+            onPress={() => router.push(item.link)}
           >
-            <View key={item.link} className="items-center justify-center">
+            <View className="items-center justify-center">
               <View className="h-7">{item.icon}</View>
               <Text
                 size="xs"
@@ -104,3 +60,48 @@ const CategoryIcon = () => {
     </Svg>
   );
 };
+
+const tabs = (pathname: string) => [
+  {
+    link: "/",
+    title: "خانه",
+    icon: (
+      <Ionicons
+        name="home-outline"
+        size={24}
+        color={pathname === "/" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
+      />
+    ),
+  },
+  {
+    link: "/products",
+    title: "محصولات",
+    icon: <CategoryIcon />,
+  },
+  {
+    link: "/cart",
+    title: "سبد خرید",
+    icon: (
+      <Ionicons
+        name="cart-outline"
+        size={26}
+        color={pathname === "cart" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
+      />
+    ),
+  },
+  {
+    link: "/profile/personal-info",
+    title: "پروفایل",
+    icon: (
+      <FontAwesome5
+        name="user"
+        size={20}
+        color={
+          pathname === "/profile/personal-info"
+            ? "rgb(244 63 94)"
+            : "rgb(107, 114, 128)"
+        }
+      />
+    ),
+  },
+];

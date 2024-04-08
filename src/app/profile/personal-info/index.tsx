@@ -13,7 +13,6 @@ const PersonalInfo = () => {
   const { user } = useUserStore();
 
   if (!user) return <LoadingScreen />;
-
   return (
     <Container withStatusBarOffset className="mt-2">
       <ProfilePanel />
