@@ -50,3 +50,32 @@ export const changeNameSchema = z.object({
         .trim(),
 });
 export type ChangeNameData = z.infer<typeof changeNameSchema>;
+
+// CHANGE EMAIL
+export const changeEmailSchema = z.object({
+    email: z
+        .string({ required_error: errorMessages.required("ایمیل") })
+        .email()
+        .trim(),
+});
+export type ChangeEmailData = z.infer<typeof changeEmailSchema>;
+
+// CHANGE PASSWORD
+export const changePasswordSchema = z.object({
+    current: z.string({
+        required_error: errorMessages.required("رمز عبور کنونی"),
+    })
+        .min(8, errorMessages.minLength("رمز عبور کنونی", 8)),
+    new: z.string({
+        required_error: errorMessages.required("رمز عبور جدید"),
+    })
+        .min(8, errorMessages.minLength("رمز عبور جدید", 8)),
+    newRepeat: z.string({
+        required_error: errorMessages.required("تکرار رمز عبور جدید"),
+    })
+        .min(8, errorMessages.minLength("تکرار رمز عبور جدید", 8)),
+}).refine((data) => data.new === data.newRepeat, {
+    message: "رمز عبور های جدید یکسان نیستند!",
+    path: ["newRepeat"],
+})
+export type ChangePasswordData = z.infer<typeof changePasswordSchema>;
