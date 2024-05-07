@@ -6,47 +6,48 @@ import {
   Pressable,
   Modal as RNModal,
   TouchableNativeFeedback,
+  ScrollView,
 } from "react-native";
 
 interface Props {
   title?: string;
   open: boolean;
   children: ReactNode;
+  hasScrollView?: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal = ({ open, setOpen, children, title }: Props) => {
-  return (
-    <RNModal
-      animationType="fade"
-      transparent
-      visible={open}
-      onRequestClose={() => setOpen(false)}
-    >
-      <View className="flex-1 items-center justify-center">
-        <View
-          style={{ width: "90%" }}
-          className="rounded-lg border border-gray-300 bg-white px-4 pb-5"
-        >
-          {/* HEADER */}
-          {title && (
-            <View className="mb-5 flex-row items-center justify-between border-b border-b-gray-200 py-5">
-              <View>
-                <Text style={{ fontSize: 15 }}>{title}</Text>
-              </View>
-              <TouchableNativeFeedback
-                onPress={() => setOpen(false)}
-                background={TouchableNativeFeedback.Ripple("#e0e0e0", false)}
-              >
-                <View>
-                  <Ionicons name="close-outline" size={26} color="#333" />
-                </View>
-              </TouchableNativeFeedback>
-            </View>
-          )}
+const Modal = ({ open, setOpen, children, title, hasScrollView = true }: Props) => {
+  const ScrollViewComp = hasScrollView ? ScrollView : React.Fragment;
 
-          {/* BODY */}
-          {children}
+  return (
+    <RNModal animationType="fade" transparent visible={open} onRequestClose={() => setOpen(false)}>
+      <View className="flex-1 justify-end">
+        <View
+          style={{ width: "100%" }}
+          className="rounded-t-2xl border border-gray-300 bg-white px-4 pb-5"
+        >
+          <ScrollViewComp>
+            {/* HEADER */}
+            {title && (
+              <View className="mb-5 flex-row items-center justify-between border-b border-b-gray-200 py-5">
+                <View>
+                  <Text style={{ fontSize: 15 }}>{title}</Text>
+                </View>
+                <TouchableNativeFeedback
+                  onPress={() => setOpen(false)}
+                  background={TouchableNativeFeedback.Ripple("#e0e0e0", false)}
+                >
+                  <View>
+                    <Ionicons name="close-outline" size={26} color="#333" />
+                  </View>
+                </TouchableNativeFeedback>
+              </View>
+            )}
+
+            {/* BODY */}
+            {children}
+          </ScrollViewComp>
         </View>
 
         {/* BLACK BACKGROUND TO CLOSE MODAL */}

@@ -17,8 +17,13 @@ export const useIsAuthenticated = () => {
             return
         }
         const fetchData = async () => {
-            const user = await getUserInfo()
-            setUser(user.data)
+            await getUserInfo()
+                .then(res => setUser(res.data))
+                .catch(err => {
+                    setUser(null)
+                    router.push("/auth/login")
+                    return
+                })
         }
         fetchData()
     }, [token, rootNavigationState?.key])

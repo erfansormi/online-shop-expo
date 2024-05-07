@@ -1,11 +1,11 @@
 import axiosInstance from "@/libs/axios"
-import { ChangeEmailData, ChangeNameData } from "@/utils/schemas"
+import { UpdateEmailData, UpdateNameData } from "@/utils/schemas"
 
-export const editName = (data: ChangeNameData) => {
+export const editName = (data: UpdateNameData) => {
     return axiosInstance.put("/api/v1/users/edit-name", data)
 }
 
-export const editEmail = (data: ChangeEmailData) => {
+export const editEmail = (data: UpdateEmailData) => {
     return axiosInstance.put("/api/v1/users/edit-email", data)
 }
 

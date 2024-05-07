@@ -18,30 +18,32 @@ const Products = () => {
 
   return (
     <View className="flex-1">
-      <Navbar />
-      <Container screenHeight>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View className="flex-1" style={{ minHeight: screenHeight }}>
-            {isLoading ? (
-              <LoadingScreen />
-            ) : (
-              data && (
-                <View
-                  className="flex-row flex-wrap"
-                  style={{
-                    gap: 10,
-                    paddingBottom: BottomNavigationHeight + 10,
-                  }}
-                >
-                  {data.products.map((item, index) => (
-                    <ProductCardV2 key={item._id} product={item} />
-                  ))}
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        data && (
+          <>
+            <Navbar />
+            <Container screenHeight>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <View className="flex-1" style={{ minHeight: screenHeight }}>
+                  <View
+                    className="flex-row flex-wrap"
+                    style={{
+                      gap: 10,
+                      paddingBottom: BottomNavigationHeight + 10,
+                    }}
+                  >
+                    {data.products.map((item, index) => (
+                      <ProductCardV2 key={item._id} product={item} />
+                    ))}
+                  </View>
                 </View>
-              )
-            )}
-          </View>
-        </ScrollView>
-      </Container>
+              </ScrollView>
+            </Container>
+          </>
+        )
+      )}
       <BottomNavigation />
     </View>
   );

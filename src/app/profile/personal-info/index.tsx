@@ -8,11 +8,12 @@ import { useUserStore } from "@/store/user-store";
 import Container from "@/components/common/container";
 import LoadingScreen from "@/components/common/loading-screen";
 import BottomNavigation from "@/components/layout/bottom-navigation";
-import ChangeNameModal from "./change-name-modal";
+import UpdateNameModal from "./update-name-modal";
 import { User } from "@/types/user";
 import { BottomNavigationHeight } from "@/utils/constants/styles";
-import ChangeEmailModal from "./change-email-modal";
-import ChangePasswordModal from "./change-password-modal";
+import UpdateEmailModal from "./update-email-modal";
+import UpdatePasswordModal from "./update-password-modal";
+import UpdateBirthDateModal from "./update-birthdate-modal";
 
 const PersonalInfo = () => {
   const { user } = useUserStore();
@@ -32,9 +33,10 @@ const PersonalInfo = () => {
   return (
     <Container withStatusBarOffset className="mt-2">
       {/* MODALS */}
-      <ChangeNameModal open={nameModal} setOpen={setNameModal} />
-      <ChangeEmailModal open={emailModal} setOpen={setEmailModal} />
-      <ChangePasswordModal open={passwordModal} setOpen={setPasswordModal} />
+      <UpdateNameModal open={nameModal} setOpen={setNameModal} />
+      <UpdateEmailModal open={emailModal} setOpen={setEmailModal} />
+      <UpdatePasswordModal open={passwordModal} setOpen={setPasswordModal} />
+      <UpdateBirthDateModal open={birthdateModal} setOpen={setBirthdateModal} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ paddingBottom: BottomNavigationHeight + 20 }}>
@@ -66,15 +68,9 @@ const PersonalInfo = () => {
                 </View>
 
                 <View>
-                  <TouchableNativeFeedback
-                    onPress={() => modalSetters[item.name](true)}
-                  >
+                  <TouchableNativeFeedback onPress={() => modalSetters[item.name](true)}>
                     <View className="p-3">
-                      <AntDesign
-                        name="edit"
-                        size={24}
-                        color="rgb(56, 189, 248)"
-                      />
+                      <AntDesign name="edit" size={24} color="rgb(56, 189, 248)" />
                     </View>
                   </TouchableNativeFeedback>
                 </View>
@@ -116,8 +112,6 @@ const personalInfoItems: (user: User) => PersonalInfoItems[] = (user) => [
   {
     name: "birthdate",
     title: "تاریخ تولد",
-    value: user.birth_date
-      ? new Date(user.birth_date).toLocaleDateString("fa")
-      : null,
+    value: user.birth_date ? new Date(user.birth_date).toLocaleDateString("fa") : null,
   },
 ];
