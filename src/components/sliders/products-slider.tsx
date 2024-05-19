@@ -7,11 +7,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface Props {
   products: Product[];
+  hasFirstBrandSlide?: boolean;
 }
 
-const ProductsSlider = ({ products }: Props) => {
+const ProductsSlider = ({ products, hasFirstBrandSlide = true }: Props) => {
   return (
-    <View className="bg-primary py-2">
+    <View className="bg-primary pr-2 py-2">
       <FlatList
         horizontal
         data={products}
@@ -20,19 +21,14 @@ const ProductsSlider = ({ products }: Props) => {
         showsHorizontalScrollIndicator={false}
         ListEmptyComponent={
           <View className="w-screen flex-1 items-center justify-center">
-            <Text className="text-xl text-white">
-              موردی برای نمایش وجود ندارد!
-            </Text>
+            <Text className="text-xl text-white">موردی برای نمایش وجود ندارد!</Text>
           </View>
         }
         renderItem={({ item, index }) => {
           return (
             <>
-              {index === 0 ? (
-                <View
-                  style={{ width: 170 }}
-                  className="flex-col items-center justify-around"
-                >
+              {index === 0 && hasFirstBrandSlide ? (
+                <View style={{ width: 170 }} className="flex-col items-center justify-around">
                   <View className="flex-col items-center">
                     <Text size="xl" color="#fff" fontFamily="vazirBlack">
                       پیشنهاد
@@ -52,23 +48,17 @@ const ProductsSlider = ({ products }: Props) => {
                       className="h-32 w-32"
                     />
                   </View>
-                  <View
-                    style={{ marginRight: 12 }}
-                    className="flex-row items-center gap-x-1"
-                  >
+                  <View style={{ marginRight: 12 }} className="flex-row items-center gap-x-1">
                     <Text size="xs" color="#fff" fontFamily="vazirBold">
                       مشاهده همه
                     </Text>
-                    <MaterialCommunityIcons
-                      size={20}
-                      color="#fff"
-                      name="chevron-left"
-                    />
+                    <MaterialCommunityIcons size={20} color="#fff" name="chevron-left" />
                   </View>
                 </View>
               ) : null}
 
               <ProductCard
+                key={item._id}
                 index={index}
                 product={item}
                 productsLength={products.length}

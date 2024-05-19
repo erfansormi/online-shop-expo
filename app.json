@@ -22,7 +22,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.erfansormi.onlineshopexpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,7 +31,12 @@
     "plugins": [
       "expo-font",
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "63016323-4252-4569-9d2a-7e8c6747b488"
+      }
+    }
   },
   "experiments": {
     "tsconfigPaths": true

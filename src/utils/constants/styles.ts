@@ -1,13 +1,13 @@
 export const fontSizes = {
-  "4xl": 32,
-  "3xl": 28,
-  "2xl": 24,
-  xl: 20,
-  lg: 18,
-  base: 16,
-  sm: 14,
-  xs: 12,
-  "2xs": 10,
+  "4xl": 31,
+  "3xl": 27,
+  "2xl": 23,
+  xl: 19,
+  lg: 17,
+  base: 15,
+  sm: 13,
+  xs: 11,
+  "2xs": 9.5,
 };
 
 export const fontFamilies = {

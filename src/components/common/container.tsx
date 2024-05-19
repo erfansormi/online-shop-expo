@@ -1,17 +1,23 @@
 import { Dimensions, StatusBar, View, ViewProps } from "react-native";
 import React, { ReactNode } from "react";
+import { BottomNavigationHeight } from "@/utils/constants/styles";
+import { screenHeight as screenH, windowHeight as windowH } from "@/utils/dimensions";
 
 interface Props {
   children: ReactNode;
   screenHeight?: boolean;
+  windowHeight?: boolean;
   withStatusBarOffset?: boolean;
+  withBottomNavigationOffset?: boolean;
 }
 
 const Container = ({
-  children,
-  withStatusBarOffset = false,
-  screenHeight = false,
   style,
+  children,
+  screenHeight = false,
+  windowHeight = false,
+  withStatusBarOffset = false,
+  withBottomNavigationOffset = false,
   ...props
 }: Props & ViewProps) => {
   return (
@@ -19,8 +25,9 @@ const Container = ({
       className="flex-1 px-4"
       style={[
         {
-          paddingTop: withStatusBarOffset ? StatusBar.currentHeight : 0,
-          height: screenHeight ? Dimensions.get("screen").height : "auto",
+          marginTop: withStatusBarOffset ? StatusBar.currentHeight : 0,
+          paddingBottom: withBottomNavigationOffset ? BottomNavigationHeight : 0,
+          maxHeight: screenHeight ? screenH : windowHeight ? windowH : "auto",
         },
         style,
       ]}

@@ -4,6 +4,7 @@ import { Image, Pressable, View } from "react-native";
 import { Product } from "../../types/main-page";
 import DiscountPercentage from "./discount-percentage";
 import { useLinkTo } from "@react-navigation/native";
+import ProductPrice from "./product-price";
 
 interface Props {
   index: number;
@@ -47,8 +48,10 @@ const ProductCard = ({ index, product, productsLength }: Props) => {
         </View>
 
         {/* PRICE */}
-        <View className="w-full">
-          <View className="w-full flex-row items-center justify-between gap-1 text-3xl">
+        <View className="w-full h-10">
+          <View
+            className={`w-full flex-row items-center gap-1 text-3xl ${product.sellers[0].variants[0].discount_percentage ? "justify-between" : "justify-end"}`}
+          >
             {/* PERCENTAGE DISCOUNT */}
             {product.sellers[0].variants[0].discount_percentage ? (
               <View>
@@ -58,24 +61,11 @@ const ProductCard = ({ index, product, productsLength }: Props) => {
               </View>
             ) : null}
 
-            <View className="flex-row items-center">
-              <Text fontFamily="vazirBold" className="text-neutral-700">
-                {Number(product.sellers[0].variants[0].price + "0000").toLocaleString("fa")}
-              </Text>
-              <Text size="2xs" fontFamily="vazirBold" className="mr-1">
-                تومان
-              </Text>
-            </View>
+            <ProductPrice price={product.sellers[0].variants[0].price} />
           </View>
 
           {/* OLD PRICE */}
-          <View className="h-5">
-            <Text size="sm" fontFamily="vazirBold" className="ml-8 text-neutral-400 line-through">
-              {product.sellers[0].variants[0].old_price
-                ? Number(product.sellers[0].variants[0].old_price + "0000").toLocaleString("fa")
-                : null}
-            </Text>
-          </View>
+          <ProductPrice oldPrice={product.sellers[0].variants[0].old_price} />
         </View>
       </View>
     </Pressable>

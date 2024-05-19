@@ -31,7 +31,7 @@ const PersonalInfo = () => {
 
   if (!user) return <LoadingScreen />;
   return (
-    <Container withStatusBarOffset className="mt-2">
+    <Container withStatusBarOffset className="pt-2">
       {/* MODALS */}
       <UpdateNameModal open={nameModal} setOpen={setNameModal} />
       <UpdateEmailModal open={emailModal} setOpen={setEmailModal} />

@@ -1,3 +1,6 @@
+if (__DEV__) {
+  import("../../ReactotronConfig");
+}
 import React from "react";
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";

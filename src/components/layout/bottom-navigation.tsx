@@ -4,6 +4,7 @@ import { usePathname, router } from "expo-router";
 import { TouchableOpacity, View } from "react-native";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { BottomNavigationHeight } from "@/utils/constants/styles";
+import { useCartStore } from "@/store/cart-store";
 
 const BottomNavigation = () => {
   const pathname = usePathname();
@@ -43,9 +44,7 @@ const CategoryIcon = () => {
 
   return (
     <Svg
-      stroke={
-        pathname === "/products" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"
-      }
+      stroke={pathname === "/products" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
       fill={pathname === "/products" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
       strokeWidth={1}
       viewBox="0 0 24 24"
@@ -58,6 +57,29 @@ const CategoryIcon = () => {
         stroke="none"
       />
     </Svg>
+  );
+};
+
+const CartIcon = () => {
+  const cart = useCartStore();
+  const pathname = usePathname();
+
+  return (
+    <View>
+      <Ionicons
+        name="cart-outline"
+        size={26}
+        color={pathname === "/cart" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
+      />
+
+      {cart.products_counts ? (
+        <View className="absolute bottom-0.5 -right-2 px-[5px] py-px bg-primary rounded-md">
+          <Text style={{ fontSize: 10, lineHeight: 16 }} color="#fff">
+            {cart.products_counts}
+          </Text>
+        </View>
+      ) : null}
+    </View>
   );
 };
 
@@ -81,13 +103,7 @@ const tabs = (pathname: string) => [
   {
     link: "/cart",
     title: "سبد خرید",
-    icon: (
-      <Ionicons
-        name="cart-outline"
-        size={26}
-        color={pathname === "cart" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
-      />
-    ),
+    icon: <CartIcon />,
   },
   {
     link: "/profile/personal-info",
@@ -96,11 +112,7 @@ const tabs = (pathname: string) => [
       <FontAwesome5
         name="user"
         size={20}
-        color={
-          pathname === "/profile/personal-info"
-            ? "rgb(244 63 94)"
-            : "rgb(107, 114, 128)"
-        }
+        color={pathname === "/profile/personal-info" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
       />
     ),
   },

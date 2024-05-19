@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "devtools": "npx react-devtools"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -47,6 +48,7 @@
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.0.0",
     "prettier-plugin-tailwindcss": "^0.5.13",
+    "reactotron-react-native": "^5.1.7",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.4.4",
     "typescript-eslint": "^7.5.0"

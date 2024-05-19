@@ -1,41 +1,27 @@
-import LoadingScreen from "@/components/common/loading-screen";
-import BottomNavigation from "@/components/layout/bottom-navigation";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Product } from "@/types/main-page";
-import { Link, useLocalSearchParams } from "expo-router";
-import React from "react";
-import { Image, Pressable, ScrollView, View } from "react-native";
-import useSWR from "swr";
-import Container from "@/components/common/container";
-import Text from "@/components/ui/text";
-import ProductDetailsHeader from "./components/product-details-header";
+import React, { useEffect } from "react";
 import Hr from "@/components/ui/hr";
+import Text from "@/components/ui/text";
+import { useLocalSearchParams } from "expo-router";
+import Container from "@/components/common/container";
+import { useProductStore } from "@/store/product-store";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import LoadingScreen from "@/components/common/loading-screen";
+import ProductsSlider from "@/components/sliders/products-slider";
+import { Image, Pressable, ScrollView, View } from "react-native";
+import ProductDetailsHeader from "./components/product-details-header";
+import ProductColorBadge from "@/components/common/product-color-badge";
+import { useProductDetails, useProducts } from "@/hooks/fetching/products";
+import ProductDetailsBottomNavbar from "./components/product-details-bottom-navbar";
+import reactotron from "reactotron-react-native";
+import { useCartStore } from "@/store/cart-store";
 
 const ProductDetails = () => {
   const { slug } = useLocalSearchParams();
-  const { data, error, isLoading } = useSWR<{
-    success: boolean;
-    product: Product;
-  }>(`/api/v1/products/${slug}`);
+  const { data, isLoading } = useProductDetails(slug as string);
   const product = data?.product;
-
-  const colors: any = {
-    sky: "bg-sky-500",
-    cyan: "bg-cyan-500",
-    purple: "bg-purple-500",
-    pink: "bg-pink-500",
-    yellow: "bg-yellow-500",
-    green: "bg-green-500",
-    slate: "bg-slate-500",
-    gray: "bg-gray-500",
-    lime: "bg-lime-500",
-    blue: "bg-blue-500",
-    rose: "bg-rose-500",
-    teal: "bg-teal-500",
-    red: "bg-red-500",
-    black: "bg-black",
-    white: "bg-white",
-  };
+  const products = useProducts();
+  const productStore = useProductStore();
+  const setter = useProductStore.setState;
 
   return (
     <View className="flex-1">
@@ -43,12 +29,29 @@ const ProductDetails = () => {
         <LoadingScreen />
       ) : (
         product && (
-          <Container withStatusBarOffset>
+          <Container windowHeight withStatusBarOffset>
             {/* HEADER */}
             <ProductDetailsHeader />
 
-            <ScrollView style={{ marginTop: 20 }}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ flexGrow: 1 }}
+              style={{ marginTop: 20 }}
+            >
               <View style={{ gap: 20 }}>
+                {/* BREDCRUMB */}
+                <View className="flex-row" style={{ gap: 4 }}>
+                  <Text size="sm" className="text-gray-500">
+                    بهمان کالا
+                  </Text>
+                  <Text size="sm" className="text-gray-500">
+                    /
+                  </Text>
+                  <Text size="sm" className="text-gray-500">
+                    {product.category}
+                  </Text>
+                </View>
+
                 {/* IMAGE */}
                 <View className="w-full items-center">
                   <Image
@@ -125,49 +128,89 @@ const ProductDetails = () => {
                 </View>
 
                 {/* COLORS */}
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{ gap: 6 }}
-                >
-                  {product.sellers[0].variants[0].colors.map((item) => (
-                    <View
-                      key={item}
-                      style={{ gap: 4 }}
-                      className="rounded-full px-3 py-2 border border-gray-200 flex-row items-center"
-                    >
-                      <View
-                        // style={{ backgroundColor: item }}
-                        className={`w-5 h-5 rounded-full border border-gray-300 ${colors[item] ? colors[item] : ""}`}
-                      />
-                      <Text size="sm" className="capitalize">
-                        {item}
-                      </Text>
-                    </View>
-                  ))}
-                </ScrollView>
+                <View>
+                  <View className="mb-1">
+                    <Text>رنگ</Text>
+                  </View>
+
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ gap: 6 }}
+                  >
+                    {product.sellers[0].variants[0].colors.map((item) => (
+                      <Pressable
+                        key={item}
+                        onPress={() => {
+                          setter({
+                            selectedVariant: {
+                              ...productStore.selectedVariant,
+                              selectedColor: item,
+                            },
+                          });
+                        }}
+                      >
+                        <ProductColorBadge
+                          color={item}
+                          isActive={item === productStore.selectedVariant?.selectedColor}
+                        />
+                      </Pressable>
+                    ))}
+                  </ScrollView>
+                </View>
 
                 {/* SIZES */}
                 {product.sellers[0].variants.find((item) => item.size) ? (
-                  <View className="flex-row" style={{ gap: 10 }}>
-                    {product.sellers[0].variants.map((item) =>
-                      item.size ? (
-                        <View className="rounded-full border border-gray-200 px-3 py-2">
-                          <Text size="sm" className="uppercase">
-                            {item.size}
-                          </Text>
-                        </View>
-                      ) : null
-                    )}
+                  <View>
+                    <View className="mb-1">
+                      <Text>سایز</Text>
+                    </View>
+                    <View className="flex-row" style={{ gap: 10 }}>
+                      {product.sellers[0].variants.map((item) =>
+                        item.size ? (
+                          <Pressable
+                            key={item._id}
+                            onPress={() => {
+                              setter({
+                                selectedVariant: {
+                                  _id: item._id,
+                                  selectedColor: item.colors[0],
+                                },
+                              });
+                            }}
+                            className={`rounded-full border border-gray-200 px-3 py-2 ${item._id === productStore.selectedVariant?._id && "border-2 border-cyan-500"}`}
+                          >
+                            <Text size="sm" className="uppercase">
+                              {item.size}
+                            </Text>
+                          </Pressable>
+                        ) : null
+                      )}
+                    </View>
                   </View>
                 ) : null}
+
+                {products.data?.products && (
+                  <View>
+                    <Text fontFamily="vazirBold" className="mb-2">
+                      محصولات مرتبط
+                    </Text>
+                    <ProductsSlider
+                      hasFirstBrandSlide={false}
+                      products={products.data.products.filter(
+                        (item) => item.category === product.category
+                      )}
+                    />
+                  </View>
+                )}
               </View>
             </ScrollView>
+
+            {/* BOTTOM NAVIGATION IN PRODUCT DETAILS PAGES */}
+            <ProductDetailsBottomNavbar />
           </Container>
         )
       )}
-
-      <BottomNavigation />
     </View>
   );
 };
