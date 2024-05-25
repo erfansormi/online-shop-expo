@@ -1,6 +1,7 @@
 import React from "react";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { router } from "expo-router";
 import Text from "@/components/ui/text";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { useCartStore } from "@/store/cart-store";
 import Container from "@/components/common/container";
 import { Image, Pressable, ScrollView, View } from "react-native";
@@ -9,15 +10,14 @@ import BottomNavigation from "@/components/layout/bottom-navigation";
 import ProductColorBadge from "@/components/common/product-color-badge";
 import ProductPrice from "@/components/common/product-price";
 import ProductCartButtons from "@/components/common/product-cart-buttons";
-import Button from "@/components/ui/button";
-import { router } from "expo-router";
+import { BottomNavigationHeight } from "@/utils/constants/styles";
 
 const CartPage = () => {
   const cart = useCartStore();
 
   return (
     <>
-      <Container withStatusBarOffset withBottomNavigationOffset>
+      <Container withStatusBarOffset style={{ paddingBottom: BottomNavigationHeight + 69 }}>
         <View className="pt-2 mb-3">
           <Text className="mb-1">سبد خرید شما</Text>
           <Text size="sm" className="text-gray-500">

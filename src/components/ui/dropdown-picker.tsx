@@ -21,7 +21,7 @@ const DropdownPicker = ({ label, ...props }: DropDownPickerProps<any> & { label?
         }}
         autoScroll
         labelStyle={{ fontFamily: "vazir" }}
-        textStyle={{ fontFamily: "vazirLight" }}
+        textStyle={{ fontFamily: "vazirLight", textAlign: "left" }}
         disabledStyle={{ backgroundColor: "#ddd" }}
         arrowIconContainerStyle={{ display: props.disabled ? "none" : "flex" }}
         listItemContainerStyle={{ borderBottomWidth: 1, borderBottomColor: "#eee" }}
