@@ -43,7 +43,6 @@ const UpdateNameModal = ({ open, setOpen }: Props) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         toast.show("خطا در تغییر نام", {
           type: "danger",
         });

@@ -4,9 +4,12 @@ import * as SecureStore from "expo-secure-store";
 import { useUserStore } from "@/store/user-store";
 import { router, useRootNavigationState } from "expo-router";
 import { useCartStore } from "@/store/cart-store";
+import reactotron from "reactotron-react-native";
+import { AxiosError } from "axios";
 
 export const useIsAuthenticated = () => {
   const token = SecureStore.getItem("token");
+
   const { setUser } = useUserStore();
   const cartSetter = useCartStore.setState;
   const rootNavigationState = useRootNavigationState();
@@ -15,7 +18,7 @@ export const useIsAuthenticated = () => {
     if (!rootNavigationState?.key) return;
 
     if (!token) {
-      router.push("/auth/login");
+      router.navigate("/auth/login");
       return;
     }
     const fetchData = async () => {
@@ -24,9 +27,11 @@ export const useIsAuthenticated = () => {
           setUser(res.data);
           cartSetter(res.data.cart as any);
         })
-        .catch((err) => {
+        .catch((err: AxiosError<any>) => {
+          reactotron.log(err.response?.data);
+
           setUser(null);
-          router.push("/auth/login");
+          router.navigate("/auth/login");
           return;
         });
     };

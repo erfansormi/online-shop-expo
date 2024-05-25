@@ -20,7 +20,7 @@ const ProductDetailsHeader = () => {
       </Link>
 
       <View className="flex-row" style={{ gap: 20 }}>
-        <Pressable onPress={() => router.push("/cart")}>
+        <Pressable onPress={() => router.navigate("/cart")}>
           <MaterialCommunityIcons name="cart-outline" size={24} color="#666" />
           {cart.products_counts ? (
             <View className="absolute -bottom-2 -right-2.5 px-1 bg-primary rounded">

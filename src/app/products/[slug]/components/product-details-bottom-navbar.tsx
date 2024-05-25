@@ -5,8 +5,8 @@ import { addProductToCart, removeProductFromCart } from "@/services/cart";
 import { useCartStore } from "@/store/cart-store";
 import { useProductStore } from "@/store/product-store";
 import { AxiosError } from "axios";
-import { useLocalSearchParams } from "expo-router";
-import React, { useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { useToast } from "react-native-toast-notifications";
 import reactotron from "reactotron-react-native";
@@ -20,13 +20,23 @@ const ProductDetailsBottomNavbar = () => {
   const { data } = useProductDetails(slug as string);
   const product = data?.product;
   const [loading, setLoading] = useState(false);
-  reactotron.log("cartStore: ", cartStore);
-  reactotron.log("productStore: ", productStore);
+  const isProductInCart =
+    cartStore &&
+    cartStore.products &&
+    cartStore.products.find(
+      (item) =>
+        item.variant._id === productStore.selectedVariant?._id &&
+        item.variant.color === productStore.selectedVariant.selectedColor
+    );
+
+  // reactotron.log("isProductInCart: ", isProductInCart);
+  reactotron.log("product store variant: ", productStore.selectedVariant);
 
   const addToCart = () => {
     setLoading(true);
     addProductToCart(productStore)
       .then((res) => {
+        reactotron.log("reaponse: ", res.data.user.cart);
         cartSetter({ ...cartStore, ...res.data.user.cart });
       })
       .catch((err: AxiosError<{ message: any }>) => {
@@ -51,14 +61,8 @@ const ProductDetailsBottomNavbar = () => {
     <View className="border-t-2 border-t-gray-200 basis-[70px] inset-x-0 ">
       <View className="flex-row items-center justify-between w-full h-full px-5">
         <View style={{ width: 170 }}>
-          {cartStore &&
-          cartStore.products &&
-          cartStore.products.find(
-            (item) =>
-              item.variant._id === productStore.selectedVariant?._id &&
-              item.variant.color === productStore.selectedVariant.selectedColor
-          ) ? (
-            <>
+          {!!isProductInCart ? (
+            <React.Fragment>
               {loading ? (
                 <Button loading> </Button>
               ) : (
@@ -67,20 +71,14 @@ const ProductDetailsBottomNavbar = () => {
                     +
                   </Button>
                   <Text style={{ flexBasis: "33.33333%", textAlign: "center" }}>
-                    {
-                      cartStore?.products.find(
-                        (item) =>
-                          item.variant._id === productStore.selectedVariant?._id &&
-                          item.variant.color === productStore.selectedVariant.selectedColor
-                      )?.variant.quantity
-                    }
+                    {isProductInCart.variant.quantity}
                   </Text>
                   <Button onPress={removeFromCart} style={{ flexBasis: "33.33333%" }}>
                     -
                   </Button>
                 </View>
               )}
-            </>
+            </React.Fragment>
           ) : (
             <Button style={{ width: "100%" }} onPress={addToCart} loading={loading}>
               افزودن به سبد خرید

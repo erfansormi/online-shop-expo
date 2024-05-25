@@ -30,7 +30,7 @@ const CartPage = () => {
             <Pressable
               key={item._id}
               style={{ gap: 16 }}
-              onPress={() => router.push(`/products/${product.slug}`)}
+              onPress={() => router.navigate(`/products/${product.slug}`)}
               className="flex border-b border-b-gray-200 flex-row py-4"
             >
               <View className="w-1/4">

@@ -9,4 +9,4 @@ export interface ProductStoreType {
   };
 }
 
-export const useProductStore = create<ProductStoreType>((srt) => ({}));
+export const useProductStore = create<ProductStoreType>((set) => ({}));

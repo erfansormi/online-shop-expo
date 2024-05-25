@@ -39,7 +39,7 @@ const Input = forwardRef<TextInput, Props & TextInputProps>(
           ref={ref}
           className={`rounded-lg px-3 ${sizes[size]} ${variants[variant]}`}
           style={[
-            { fontFamily, paddingVertical: 0, paddingHorizontal: 0 },
+            { fontFamily, paddingVertical: 0, paddingHorizontal: 0, textAlign: "right" },
             style,
           ]}
           {...props}

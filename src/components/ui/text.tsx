@@ -16,10 +16,7 @@ const Text = ({
   ...props
 }: TextProps & Props) => {
   return (
-    <NativeText
-      style={[{ fontFamily, color, fontSize: fontSizes[size] }, style]}
-      {...props}
-    >
+    <NativeText style={[{ fontFamily, color, fontSize: fontSizes[size] }, style]} {...props}>
       {props.children}
     </NativeText>
   );

@@ -5,13 +5,7 @@ import Button from "@/components/ui/button";
 import Container from "@/components/common/container";
 import { Controller } from "react-hook-form";
 import { useLogin } from "@/hooks/auth/useLogin";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  TextInput,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, TextInput, View } from "react-native";
 import { Link } from "expo-router";
 
 const Login = () => {
@@ -31,17 +25,10 @@ const Login = () => {
         className="flex-1 justify-center"
         contentContainerStyle={{ flex: 1, justifyContent: "center" }}
       >
-        <ScrollView
-          keyboardShouldPersistTaps={"handled"}
-          showsVerticalScrollIndicator={false}
-        >
+        <ScrollView keyboardShouldPersistTaps={"handled"} showsVerticalScrollIndicator={false}>
           <View className="w-full min-h-screen justify-center">
             {/* TITLE */}
-            <Text
-              size="3xl"
-              fontFamily="vazirBold"
-              className="text-center text-rose-600"
-            >
+            <Text size="3xl" fontFamily="vazirBold" className="text-center text-rose-600">
               بهمان کالا
             </Text>
 
@@ -64,6 +51,7 @@ const Login = () => {
                       onChangeText={onChange}
                       label="ایمیل"
                       inputMode="email"
+                      keyboardType="email-address"
                       autoComplete="email"
                       placeholder="ایمیل خود را وارد کنید"
                       error={errors.email && errors.email.message}

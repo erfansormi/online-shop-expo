@@ -19,7 +19,7 @@ const BottomNavigation = () => {
           <TouchableOpacity
             key={item.link}
             className="w-1/4"
-            onPress={() => router.push(item.link)}
+            onPress={() => router.navigate(item.link)}
           >
             <View className="items-center justify-center">
               <View className="h-7">{item.icon}</View>

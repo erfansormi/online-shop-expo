@@ -40,7 +40,6 @@ const UpdateEmailModal = ({ open, setOpen }: Props) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         toast.show("خطا در تغییر ایمیل", {
           type: "danger",
         });
