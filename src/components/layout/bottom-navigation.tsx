@@ -69,7 +69,7 @@ const CartIcon = () => {
       <Ionicons
         name="cart-outline"
         size={26}
-        color={pathname === "/cart" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
+        color={pathname === "/checkout/cart" ? "rgb(244 63 94)" : "rgb(107, 114, 128)"}
       />
 
       {cart.products_counts ? (
@@ -101,7 +101,7 @@ const tabs = (pathname: string) => [
     icon: <CategoryIcon />,
   },
   {
-    link: "/cart",
+    link: "/checkout/cart",
     title: "سبد خرید",
     icon: <CartIcon />,
   },

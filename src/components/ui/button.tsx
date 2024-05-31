@@ -23,7 +23,7 @@ interface Props {
 }
 
 const Button = (props: Props) => {
-  const { size = "sm", variant = "primary", fontSizes = "base" } = props;
+  const { size = "sm", variant = "primary", fontSizes = "sm" } = props;
 
   return (
     <TouchableNativeFeedback
@@ -62,8 +62,8 @@ const viewVariants = {
     outline: "bg-white border border-solid border-rose-500 text-rose-500",
   },
   size: {
-    base: "py-3.5 px-5",
-    sm: "py-2.5 px-4",
+    base: "py-3 px-5",
+    sm: "py-2 px-4",
     xs: "py-1.5 px-3",
   },
 };

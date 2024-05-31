@@ -10,7 +10,7 @@ interface Props {
 
 const Text = ({
   size = "base",
-  color = "#222",
+  color = "#333",
   fontFamily = "vazir",
   style,
   ...props

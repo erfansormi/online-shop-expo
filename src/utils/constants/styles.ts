@@ -18,3 +18,8 @@ export const fontFamilies = {
 };
 
 export const BottomNavigationHeight = 110;
+
+export const colors = {
+  primary: "#ef4056",
+  icon: "rgb(75, 85, 99)",
+};

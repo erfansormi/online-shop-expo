@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { TouchableNativeFeedback, View } from "react-native";
 import Text from "@/components/ui/text";
-import {
-  FontAwesome5,
-  FontAwesome6,
-  FontAwesome,
-  Ionicons,
-  AntDesign,
-} from "@expo/vector-icons";
+import { FontAwesome5, FontAwesome6, FontAwesome, Ionicons, AntDesign } from "@expo/vector-icons";
 import { useUserStore } from "@/store/user-store";
 import LoadingScreen from "@/components/common/loading-screen";
 import LogoutModal from "./logout-modal";
 import { useRoute } from "@react-navigation/native";
+import { router } from "expo-router";
 
 const ProfilePanel = () => {
   const { user } = useUserStore();
@@ -53,6 +48,7 @@ const ProfilePanel = () => {
           <TouchableNativeFeedback
             key={item.link}
             background={TouchableNativeFeedback.Ripple("#e0e0e0", false)}
+            onPress={() => router.navigate(`/profile/${item.link}`)}
           >
             <View
               style={{ gap: 6 }}
@@ -64,6 +60,7 @@ const ProfilePanel = () => {
           </TouchableNativeFeedback>
         ))}
 
+        {/* LOGOUT */}
         <TouchableNativeFeedback
           background={TouchableNativeFeedback.Ripple("#e0e0e0", false)}
           onPress={() => setOpenLogoutModal(true)}
@@ -93,21 +90,12 @@ const profileLinks = [
   {
     text: "فعالیت ها",
     link: "activities",
-    icon: (
-      <AntDesign style={{ marginTop: -4 }} name="home" size={22} color="#222" />
-    ),
+    icon: <AntDesign style={{ marginTop: -4 }} name="home" size={22} color="#222" />,
   },
   {
     text: "سفارش ها",
     link: "orders",
-    icon: (
-      <Ionicons
-        style={{ marginTop: -4 }}
-        name="bag-handle-outline"
-        size={22}
-        color="#222"
-      />
-    ),
+    icon: <Ionicons style={{ marginTop: -4 }} name="bag-handle-outline" size={22} color="#222" />,
   },
   {
     text: "لیست های من",

@@ -7,13 +7,14 @@ interface Props {
   color: string;
   isActive?: boolean;
   isMinimal?: boolean;
+  minimalClassName?: string;
 }
 
-const ProductColorBadge = ({ color, isActive, isMinimal = false }: Props) => {
+const ProductColorBadge = ({ color, isActive, isMinimal = false, minimalClassName }: Props) => {
   if (isMinimal) {
     return (
       <View
-        className={`w-5 h-5 rounded-full border border-gray-300 ${colors[color] ? colors[color] : ""}`}
+        className={`w-5 h-5 rounded-full border border-gray-300 ${colors[color] ? colors[color] : ""} ${minimalClassName}`}
       />
     );
   }

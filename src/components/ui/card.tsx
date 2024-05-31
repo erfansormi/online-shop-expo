@@ -2,7 +2,7 @@ import { View, ViewProps } from "react-native";
 
 const Card = ({ style, ...props }: ViewProps) => {
   return (
-    <View className="rounded-lg border border-gray-200 p-4" style={[style]}>
+    <View className="rounded-lg border bg-white border-gray-200 p-4" style={[style]}>
       {props.children}
     </View>
   );

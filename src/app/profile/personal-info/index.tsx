@@ -1,19 +1,15 @@
-import React, { useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import { ScrollView, TouchableNativeFeedback, View } from "react-native";
+import { User } from "@/types/user";
 import Text from "@/components/ui/text";
 import Card from "@/components/ui/card";
-import ProfilePanel from "../profile-panel";
+import React, { useState } from "react";
+import ProfileLayout from "../components/profile-layout";
+import { AntDesign } from "@expo/vector-icons";
 import { useUserStore } from "@/store/user-store";
-import Container from "@/components/common/container";
-import LoadingScreen from "@/components/common/loading-screen";
-import BottomNavigation from "@/components/layout/bottom-navigation";
-import UpdateNameModal from "./update-name-modal";
-import { User } from "@/types/user";
-import { BottomNavigationHeight } from "@/utils/constants/styles";
-import UpdateEmailModal from "./update-email-modal";
-import UpdatePasswordModal from "./update-password-modal";
-import UpdateBirthDateModal from "./update-birthdate-modal";
+import UpdateNameModal from "./components/update-name-modal";
+import UpdateEmailModal from "./components/update-email-modal";
+import UpdatePasswordModal from "./components/update-password-modal";
+import UpdateBirthDateModal from "./components/update-birthdate-modal";
+import { TouchableNativeFeedback, View } from "react-native";
 
 const PersonalInfo = () => {
   const { user } = useUserStore();
@@ -29,59 +25,50 @@ const PersonalInfo = () => {
     birthdate: setBirthdateModal,
   };
 
-  if (!user) return <LoadingScreen />;
   return (
-    <Container withStatusBarOffset className="pt-2">
+    <ProfileLayout>
       {/* MODALS */}
       <UpdateNameModal open={nameModal} setOpen={setNameModal} />
       <UpdateEmailModal open={emailModal} setOpen={setEmailModal} />
       <UpdatePasswordModal open={passwordModal} setOpen={setPasswordModal} />
       <UpdateBirthDateModal open={birthdateModal} setOpen={setBirthdateModal} />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ paddingBottom: BottomNavigationHeight + 20 }}>
-          <ProfilePanel />
-
-          {/* PERSONAL INFO CARD CHANGABLE */}
-          <Card
-            className="p-0 border-b-0"
-            style={{
-              height: "auto",
-              flex: 0,
-            }}
+      {/* PERSONAL INFO CARD CHANGABLE */}
+      <Card
+        className="p-0 border-b-0"
+        style={{
+          height: "auto",
+          flex: 0,
+        }}
+      >
+        {personalInfoItems(user!).map((item) => (
+          <View
+            key={item.name}
+            className="flex-row items-center justify-between p-5 border-b border-b-gray-200"
           >
-            {personalInfoItems(user).map((item) => (
-              <View
-                key={item.name}
-                className="flex-row items-center justify-between p-5 border-b border-b-gray-200"
-              >
-                <View className="gap-y-3">
-                  {/* TITLE */}
-                  <Text size="sm" className="text-gray-500">
-                    {item.title}
-                  </Text>
+            <View className="gap-y-3">
+              {/* TITLE */}
+              <Text size="sm" className="text-gray-500">
+                {item.title}
+              </Text>
 
-                  {/* VALUE */}
-                  <View className="flex-row">
-                    <Text>{item.value}</Text>
-                  </View>
-                </View>
-
-                <View>
-                  <TouchableNativeFeedback onPress={() => modalSetters[item.name](true)}>
-                    <View className="p-3">
-                      <AntDesign name="edit" size={24} color="rgb(56, 189, 248)" />
-                    </View>
-                  </TouchableNativeFeedback>
-                </View>
+              {/* VALUE */}
+              <View className="flex-row">
+                <Text>{item.value}</Text>
               </View>
-            ))}
-          </Card>
-        </View>
-      </ScrollView>
+            </View>
 
-      <BottomNavigation />
-    </Container>
+            <View>
+              <TouchableNativeFeedback onPress={() => modalSetters[item.name](true)}>
+                <View className="p-3">
+                  <AntDesign name="edit" size={24} color="rgb(56, 189, 248)" />
+                </View>
+              </TouchableNativeFeedback>
+            </View>
+          </View>
+        ))}
+      </Card>
+    </ProfileLayout>
   );
 };
 

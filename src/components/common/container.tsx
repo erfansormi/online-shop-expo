@@ -1,4 +1,4 @@
-import { Dimensions, StatusBar, View, ViewProps } from "react-native";
+import { StatusBar, View, ViewProps } from "react-native";
 import React, { ReactNode } from "react";
 import { BottomNavigationHeight } from "@/utils/constants/styles";
 import { screenHeight as screenH, windowHeight as windowH } from "@/utils/dimensions";
