@@ -3,6 +3,7 @@ import Button from "@/components/ui/button";
 import Text from "@/components/ui/text";
 import { useCartStore } from "@/store/cart-store";
 import { BottomNavigationHeight } from "@/utils/constants/styles";
+import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
@@ -21,8 +22,9 @@ const CartBottomNavbar = () => {
       }}
     >
       <View>
-        <Button>تایید و تکمیل سفارش</Button>
+        <Button onPress={() => router.navigate("/checkout/shipping")}>تایید و تکمیل سفارش</Button>
       </View>
+
       <View>
         <Text size="sm" className="text-gray-500">
           جمع سبد خرید
