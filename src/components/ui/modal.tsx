@@ -14,10 +14,11 @@ interface Props {
   open: boolean;
   children: ReactNode;
   hasScrollView?: boolean;
+  description?: ReactNode | string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal = ({ open, setOpen, children, title, hasScrollView = true }: Props) => {
+const Modal = ({ open, setOpen, children, title, hasScrollView = true, description }: Props) => {
   const ScrollViewComp = hasScrollView ? ScrollView : React.Fragment;
 
   return (
@@ -32,7 +33,14 @@ const Modal = ({ open, setOpen, children, title, hasScrollView = true }: Props) 
             {title && (
               <View className="mb-5 flex-row items-center justify-between border-b border-b-gray-200 py-5">
                 <View>
-                  <Text style={{ fontSize: 15 }}>{title}</Text>
+                  <Text style={{ fontSize: 15, marginBottom: 6 }}>{title}</Text>
+                  {description && typeof description === "string" ? (
+                    <Text size="sm" className="text-gray-500">
+                      {description}
+                    </Text>
+                  ) : (
+                    description
+                  )}
                 </View>
                 <TouchableNativeFeedback
                   onPress={() => setOpen(false)}

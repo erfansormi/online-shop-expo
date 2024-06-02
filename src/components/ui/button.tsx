@@ -16,7 +16,7 @@ interface Props {
   children: ReactNode;
   onPress?: () => void;
   viewProps?: ViewProps;
-  fontSizes?: keyof typeof fontSizes;
+  fontSizes?: keyof typeof fontSizes | number;
   size?: keyof typeof viewVariants.size;
   variant?: keyof typeof viewVariants.variant;
   touchableProps?: TouchableNativeFeedbackProps;
@@ -37,7 +37,9 @@ const Button = (props: Props) => {
         style={[{ opacity: props.loading ? 0.8 : 1 }, props.style]}
       >
         <Text
-          style={{ fontSize: textVariants.fontSizes[fontSizes] }}
+          style={{
+            fontSize: typeof fontSizes === "number" ? fontSizes : textVariants.fontSizes[fontSizes],
+          }}
           className={`text-center ${textVariants.variant[variant]}`}
         >
           {props.loading ? (
@@ -63,6 +65,7 @@ const viewVariants = {
   },
   size: {
     base: "py-3 px-5",
+    base2: "py-2.5 px-[18px]",
     sm: "py-2 px-4",
     xs: "py-1.5 px-3",
   },

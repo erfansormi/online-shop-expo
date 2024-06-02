@@ -4,7 +4,7 @@ import { Text as NativeText, TextProps } from "react-native";
 
 interface Props {
   color?: string;
-  size?: keyof typeof fontSizes;
+  size?: keyof typeof fontSizes | number;
   fontFamily?: keyof typeof fontFamilies;
 }
 
@@ -16,7 +16,13 @@ const Text = ({
   ...props
 }: TextProps & Props) => {
   return (
-    <NativeText style={[{ fontFamily, color, fontSize: fontSizes[size] }, style]} {...props}>
+    <NativeText
+      style={[
+        { fontFamily, color, fontSize: typeof size === "number" ? size : fontSizes[size] },
+        style,
+      ]}
+      {...props}
+    >
       {props.children}
     </NativeText>
   );
