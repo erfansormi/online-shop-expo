@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
+  Animated,
   ScrollView,
-  TouchableHighlight,
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
@@ -24,6 +24,21 @@ const ShippingSelectDateModal = () => {
   const setter = useShippingStore.setState;
   const { deliverTimeModal, deliveryDate, deliveryHour, activeDateTab } = useShippingStore();
   const setOpen = (value: boolean) => setter({ deliverTimeModal: value });
+  const xPos = useRef(new Animated.Value(200)).current;
+
+  useEffect(() => {
+    Animated.timing(xPos, {
+      toValue: 200,
+      duration: 0,
+      useNativeDriver: false,
+    }).reset();
+
+    Animated.timing(xPos, {
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
+    }).start();
+  }, [deliverTimeModal]);
 
   return (
     <Modal
@@ -53,7 +68,26 @@ const ShippingSelectDateModal = () => {
                 key={date.day()}
                 className={`w-1/5 ${date.date() === activeDateTab && "border-b-[3px] border-b-cyan-500"}`}
               >
-                <TouchableNativeFeedback onPress={() => setter({ activeDateTab: date.date() })}>
+                <TouchableNativeFeedback
+                  onPress={() => {
+                    Animated.timing(xPos, {
+                      duration: 0,
+                      isInteraction: true,
+                      useNativeDriver: true,
+                      toValue: activeDateTab && activeDateTab > date.date() ? -400 : 200,
+                    }).start(({ finished }) => {
+                      if (finished) {
+                        Animated.timing(xPos, {
+                          toValue: 0,
+                          duration: 400,
+                          useNativeDriver: true,
+                        }).start();
+                      }
+                    });
+
+                    setter({ activeDateTab: date.date() });
+                  }}
+                >
                   <View className="items-center p-2 rounded-lg">
                     <Text size="sm" className="text-gray-600">
                       {Intl.DateTimeFormat("fa", { weekday: "long" }).format(
@@ -70,7 +104,12 @@ const ShippingSelectDateModal = () => {
         </ScrollView>
 
         {/* HOURS */}
-        <View className="px-5">
+        <Animated.View
+          className="px-5"
+          style={{
+            transform: [{ translateX: xPos }],
+          }}
+        >
           {hours.map((item, i) => (
             <View
               key={item.title}
@@ -96,7 +135,7 @@ const ShippingSelectDateModal = () => {
               </TouchableOpacity>
             </View>
           ))}
-        </View>
+        </Animated.View>
       </View>
     </Modal>
   );
