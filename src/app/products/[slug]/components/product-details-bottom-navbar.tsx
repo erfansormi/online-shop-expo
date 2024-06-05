@@ -64,23 +64,25 @@ const ProductDetailsBottomNavbar = () => {
           {!!isProductInCart ? (
             <React.Fragment>
               {loading ? (
-                <Button loading> </Button>
+                <Button size="base" loading>
+                  {" "}
+                </Button>
               ) : (
                 <View className="w-full flex-row justify-between items-center">
-                  <Button onPress={addToCart} style={{ flexBasis: "33.33333%" }}>
+                  <Button size="base" onPress={addToCart} style={{ flexBasis: "33.33333%" }}>
                     +
                   </Button>
                   <Text style={{ flexBasis: "33.33333%", textAlign: "center" }}>
                     {isProductInCart.variant.quantity}
                   </Text>
-                  <Button onPress={removeFromCart} style={{ flexBasis: "33.33333%" }}>
+                  <Button size="base" onPress={removeFromCart} style={{ flexBasis: "33.33333%" }}>
                     -
                   </Button>
                 </View>
               )}
             </React.Fragment>
           ) : (
-            <Button style={{ width: "100%" }} onPress={addToCart} loading={loading}>
+            <Button size="base" style={{ width: "100%" }} onPress={addToCart} loading={loading}>
               افزودن به سبد خرید
             </Button>
           )}
