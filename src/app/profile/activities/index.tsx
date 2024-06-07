@@ -18,7 +18,7 @@ const RecentVisits = () => {
         <LoadingScreen />
       ) : (
         <ProfileLayout>
-          <Card isEmpty={!!data && data.recentVisits.length <= 0}>
+          <Card emptyTitle="اخرین بازدیدها" isEmpty={!!data && data.recentVisits.length <= 0}>
             <Text fontFamily="vazirBold" className="mb-1 pb-3 border-b border-b-gray-200">
               اخرین بازدیدها
             </Text>

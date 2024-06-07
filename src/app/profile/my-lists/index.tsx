@@ -15,9 +15,9 @@ const MyLists = () => {
 
   return (
     <ProfileLayout>
-      <Card isEmpty={!!user && user.favorites_list.length <= 0}>
+      <Card emptyTitle="لیست مورد علاقه" isEmpty={!!user && user.favorites_list.length <= 0}>
         <Text fontFamily="vazirBold" className="mb-1 pb-3 border-b border-b-gray-200">
-          لیست ها
+          لیست مورد علاقه
         </Text>
 
         {user?.favorites_list.map((item, index) => (
