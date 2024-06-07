@@ -1,17 +1,16 @@
 import React from "react";
-import useSWR from "swr";
 import { router } from "expo-router";
 import Card from "@/components/ui/card";
 import Text from "@/components/ui/text";
-import { Product } from "@/types/main-page";
 import ProfileLayout from "../components/profile-layout";
 import ProductPrice from "@/components/common/product-price";
 import LoadingScreen from "@/components/common/loading-screen";
 import { Dimensions, Image, Pressable, View } from "react-native";
 import DiscountPercentage from "@/components/common/discount-percentage";
+import { useActivitiesApi } from "@/hooks/fetching/profile";
 
 const RecentVisits = () => {
-  const { data, isLoading } = useSWR<{ recentVisits: Product[] }>("/api/v1/users/recent-visits");
+  const { data, isLoading } = useActivitiesApi();
 
   return (
     <>

@@ -4,13 +4,14 @@ import Text from "@/components/ui/text";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useCartStore } from "@/store/cart-store";
 import Container from "@/components/common/container";
-import { Image, Pressable, ScrollView, View } from "react-native";
+import { Image, Pressable, ScrollView, TouchableOpacity, View } from "react-native";
 import CartBottomNavbar from "./components/cart-bottom-navbar";
 import BottomNavigation from "@/components/layout/bottom-navigation";
 import ProductColorBadge from "@/components/common/product-color-badge";
 import ProductPrice from "@/components/common/product-price";
 import ProductCartButtons from "@/components/common/product-cart-buttons";
-import { BottomNavigationHeight } from "@/utils/constants/styles";
+import { BottomNavigationHeight, colors } from "@/utils/constants/styles";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const CartPage = () => {
   const cart = useCartStore();
@@ -18,11 +19,19 @@ const CartPage = () => {
   return (
     <>
       <Container withStatusBarOffset style={{ paddingBottom: BottomNavigationHeight + 69 }}>
-        <View className="pt-2 mb-3">
-          <Text className="mb-1">سبد خرید شما</Text>
-          <Text size="sm" className="text-gray-500">
-            {cart.products_counts} کالا
-          </Text>
+        <View className="py-2 mb-2 border-b border-gray-200">
+          <View className="flex-row justify-between items-center">
+            <View>
+              <Text className="mb-1">سبد خرید شما</Text>
+              <Text size="sm" className="text-gray-500">
+                {cart.products_counts} کالا
+              </Text>
+            </View>
+
+            <TouchableOpacity onPress={() => router.back()}>
+              <AntDesign name="arrowleft" size={24} color={colors.icon} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <ScrollView showsVerticalScrollIndicator={false}>

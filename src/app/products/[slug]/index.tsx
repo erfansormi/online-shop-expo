@@ -30,8 +30,8 @@ const ProductDetails = () => {
 
             <ScrollView
               showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ flexGrow: 1 }}
-              style={{ marginTop: 20 }}
+              contentContainerStyle={{ flexGrow: 1, paddingBottom: 40 }}
+              style={{ paddingTop: 20 }}
             >
               <View style={{ gap: 20 }}>
                 {/* BREDCRUMB */}

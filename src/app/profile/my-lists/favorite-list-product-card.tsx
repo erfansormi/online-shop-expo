@@ -12,6 +12,7 @@ import { colors } from "@/utils/constants/styles";
 import axiosInstance from "@/libs/axios";
 import { Toast } from "react-native-toast-notifications";
 import { FavoritesList } from "@/types/user";
+import { likeProductApi } from "@/services/profile";
 
 const FavoriteListProductCard = ({
   product: item,
@@ -73,8 +74,7 @@ const FavoriteListProductCard = ({
             loading={loading}
             onPress={() => {
               setLoading(true);
-              axiosInstance
-                .post(`/api/v1/users/${item._id}/add-to-favorites`)
+              likeProductApi(item._id)
                 .then((res) => {
                   if (user) {
                     setUser({ ...user, favorites_list: res.data.favorites_list });

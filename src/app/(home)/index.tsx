@@ -5,12 +5,7 @@ import FourthBanner from "./components/fourth-banner";
 import { MainPageResponse } from "../../types/main-page";
 import { Ionicons } from "@expo/vector-icons";
 import ProductsSlider from "../../components/sliders/products-slider";
-import {
-  Pressable,
-  ScrollView,
-  TouchableNativeFeedback,
-  View,
-} from "react-native";
+import { Pressable, ScrollView, TouchableNativeFeedback, View } from "react-native";
 import SupermarketAmazing from "./components/supermarket-amazing";
 import MainCategories from "./components/main-categories";
 import PopularBrands from "./components/popular-brands";
@@ -21,8 +16,7 @@ import useSWR from "swr";
 import Text from "@/components/ui/text";
 
 const Home = () => {
-  const { data, error, isLoading, mutate } =
-    useSWR<MainPageResponse>("/api/v1/home-data");
+  const { data, error, isLoading, mutate } = useSWR<MainPageResponse>("/api/v1/home-data");
   return (
     <>
       {isLoading ? (
@@ -37,11 +31,7 @@ const Home = () => {
               <Text className="text-red-500" size="xl">
                 تلاش دوباره
               </Text>
-              <Ionicons
-                name="refresh-outline"
-                size={30}
-                color="rgb(239 68 68)"
-              />
+              <Ionicons name="refresh-outline" size={30} color="rgb(239 68 68)" />
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -50,7 +40,7 @@ const Home = () => {
           <View className="flex-1">
             <Navbar />
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
               <View style={{ paddingBottom: BottomNavigationHeight, gap: 12 }}>
                 <View className="mt-1">
                   <Hr />

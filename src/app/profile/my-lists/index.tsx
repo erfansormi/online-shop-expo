@@ -1,18 +1,17 @@
-import useSWR from "swr";
 import React from "react";
 import { View } from "react-native";
 import Card from "@/components/ui/card";
 import Text from "@/components/ui/text";
-import { Product } from "@/types/main-page";
 import { useUserStore } from "@/store/user-store";
 import ProfileLayout from "../components/profile-layout";
 import FavoriteListProductCard from "./favorite-list-product-card";
 import ProductsSlider from "@/components/sliders/products-slider";
 import Hr from "@/components/ui/hr";
+import { useActivitiesApi } from "@/hooks/fetching/profile";
 
 const MyLists = () => {
   const { user } = useUserStore();
-  const { data } = useSWR<{ recentVisits: Product[] }>("/api/v1/users/recent-visits");
+  const { data } = useActivitiesApi();
 
   return (
     <ProfileLayout>
