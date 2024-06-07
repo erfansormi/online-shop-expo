@@ -38,8 +38,8 @@ const ShippingProductsInfo = () => {
           <View key={item._id} style={{ gap: 10 }}>
             <View>
               <Image
-                width={90}
-                height={90}
+                width={85}
+                height={85}
                 style={{ objectFit: "contain" }}
                 source={{ uri: item.product.image }}
               />
