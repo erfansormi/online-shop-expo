@@ -9,10 +9,11 @@ import { useUserStore } from "@/store/user-store";
 import Container from "@/components/common/container";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ProductPrice from "@/components/common/product-price";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { Dimensions, ScrollView, TouchableOpacity, View } from "react-native";
 import ShippingProductsInfo from "./components/shipping-products-info";
 import { useShippingStore } from "@/store/shipping-store";
 import ShippingSelectDateModal from "./components/shipping-delivery-time-modal";
+import { Toast } from "react-native-toast-notifications";
 
 const Shipping = () => {
   const { user } = useUserStore();
@@ -20,7 +21,7 @@ const Shipping = () => {
 
   return (
     <>
-      <Container withStatusBarOffset windowHeight className="bg-gray-200 px-0">
+      <Container withStatusBarOffset windowHeight className="bg-gray-100 px-0">
         <ScrollView contentContainerStyle={{ gap: 8, paddingBottom: 98 }}>
           {/* HEADER */}
           <Card className="pt-2 pb-3 bg-white">
@@ -37,7 +38,7 @@ const Shipping = () => {
           </Card>
 
           {/* SELECTED ADDRESS */}
-          <Card className="bg-white flex-row items-center" style={{ gap: 5 }}>
+          {/* <Card className="bg-white flex-row items-center" style={{ gap: 5 }}>
             <MaterialCommunityIcons name="map-marker-outline" size={24} color={colors.icon} />
             <View style={{ gap: 5 }}>
               <Text className="text-gray-600" size="sm">
@@ -48,7 +49,7 @@ const Shipping = () => {
                 {user?.first_name} {user?.last_name}
               </Text>
             </View>
-          </Card>
+          </Card> */}
 
           {/* SELECTED PRODUCTS INFO */}
           <ShippingProductsInfo />
@@ -85,7 +86,23 @@ const Shipping = () => {
         >
           <View className="py-1">
             {deliveryDate && deliveryHour ? (
-              <Button size={"base2"} fontSizes={14}>
+              <Button
+                onPress={() => {
+                  Toast.show(
+                    "بدلیل تحریم ها و عدم امکان استفاده از گوگل مپ و نیاز بکند این پروژه به ثبت آدرس قبل از ارسال سفارش، فعلا امکان ثبت سفارش نمی‌باشد!",
+                    {
+                      type: "danger",
+                      textStyle: {
+                        width: Dimensions.get("window").width - 100,
+                        fontFamily: "vazir",
+                      },
+                      duration: 7000,
+                    }
+                  );
+                }}
+                size={"base2"}
+                fontSizes={14}
+              >
                 ثبت سفارش
               </Button>
             ) : (
