@@ -17,7 +17,7 @@ const ProductsSlider = ({ products, hasFirstBrandSlide = true }: Props) => {
         horizontal
         data={products}
         decelerationRate={0.8}
-        keyExtractor={(item) => item._id}
+        keyExtractor={(item, index) => item._id + index}
         showsHorizontalScrollIndicator={false}
         ListEmptyComponent={
           <View className="w-screen flex-1 items-center justify-center">
