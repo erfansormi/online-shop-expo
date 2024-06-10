@@ -23,12 +23,14 @@ const ProductCartButtons = ({
       {cart?.products?.find((item) => item.variant._id === variantId) ? (
         <>
           {loading ? (
-            <Button loading> </Button>
+            <Button size="base2" loading>
+              {" "}
+            </Button>
           ) : (
             <View className="w-full flex-row justify-between items-center">
               <Button
                 onPress={() => addToCart(requestBody)}
-                style={{ width: 45, height: 45, alignItems: "center" }}
+                style={{ width: 44, height: 44, alignItems: "center" }}
               >
                 +
               </Button>
@@ -41,7 +43,7 @@ const ProductCartButtons = ({
               </Text>
               <Button
                 onPress={() => removeFromCart(requestBody)}
-                style={{ width: 45, height: 45, alignItems: "center" }}
+                style={{ width: 44, height: 44, alignItems: "center" }}
               >
                 -
               </Button>
@@ -49,7 +51,12 @@ const ProductCartButtons = ({
           )}
         </>
       ) : (
-        <Button style={{ width: "100%" }} onPress={() => addToCart(requestBody)} loading={loading}>
+        <Button
+          size="base2"
+          style={{ width: "100%" }}
+          onPress={() => addToCart(requestBody)}
+          loading={loading}
+        >
           افزودن به سبد خرید
         </Button>
       )}

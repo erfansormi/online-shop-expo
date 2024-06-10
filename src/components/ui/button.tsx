@@ -33,7 +33,7 @@ const Button = (props: Props) => {
     >
       <View
         {...props.viewProps}
-        className={`rounded-lg ${viewVariants.variant[variant]} ${viewVariants.size[size]}`}
+        className={`rounded-lg items-center justify-center ${viewVariants.variant[variant]} ${viewVariants.size[size]}`}
         style={[{ opacity: props.loading ? 0.8 : 1 }, props.style]}
       >
         <Text
@@ -64,10 +64,10 @@ const viewVariants = {
     outline: "bg-white border border-solid border-rose-500 text-rose-500",
   },
   size: {
-    base: "py-3 px-5",
-    base2: "py-2.5 px-[18px]",
-    sm: "py-2 px-4",
-    xs: "py-1.5 px-3",
+    base: "h-12 px-5",
+    base2: "h-11 px-[18px]",
+    sm: "h-10 px-4",
+    xs: "h-9 px-3",
   },
 };
 

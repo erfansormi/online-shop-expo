@@ -28,7 +28,7 @@ const Modal = ({ open, setOpen, children, title, hasScrollView = true, descripti
           style={{ width: "100%" }}
           className="rounded-t-2xl border border-gray-300 bg-white px-4 pb-5"
         >
-          <ScrollViewComp showsVerticalScrollIndicator={false}>
+          <ScrollViewComp showsVerticalScrollIndicator={hasScrollView ? false : undefined}>
             {/* HEADER */}
             {title && (
               <View className="mb-5 flex-row items-center justify-between border-b border-b-gray-200 py-5">

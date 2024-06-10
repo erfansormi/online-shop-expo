@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, router } from "expo-router";
-import { Pressable, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
+import { TouchableOpacity, View } from "react-native";
 import Text from "@/components/ui/text";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useCartStore } from "@/store/cart-store";
@@ -24,12 +24,12 @@ const ProductDetailsHeader = () => {
       <View className="flex-row items-center" style={{ gap: 10 }}>
         {/* Back Icon */}
         <TouchableOpacity onPress={() => router.back()}>
-          <MaterialCommunityIcons name="arrow-right" size={24} color={colors.icon} />
+          <MaterialCommunityIcons name="arrow-right" size={26} color={colors.icon} />
         </TouchableOpacity>
 
         {/* Home Icon */}
         <TouchableOpacity onPress={() => router.navigate("/")}>
-          <MaterialCommunityIcons name="home-outline" size={24} color={colors.icon} />
+          <MaterialCommunityIcons name="home-outline" size={26} color={colors.icon} />
         </TouchableOpacity>
       </View>
 

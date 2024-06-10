@@ -8,6 +8,7 @@ import { useToast } from "react-native-toast-notifications";
 import { loginSchema, LoginSchemaData } from "@/utils/schemas";
 import { useUserStore } from "@/store/user-store";
 import axiosInstance from "@/libs/axios";
+import { AxiosError } from "axios";
 
 export const useLogin = () => {
   const toast = useToast();
@@ -25,8 +26,8 @@ export const useLogin = () => {
         toast.show("ورود با موفقیت انجام شد", { type: "success" });
         router.navigate("/");
       })
-      .catch((err) => {
-        toast.show("خطا در ورود", { type: "danger" });
+      .catch((err: AxiosError<any>) => {
+        toast.show(err.response?.data?.message || err.message, { type: "danger" });
       })
       .finally(() => setLoading(false));
   };
