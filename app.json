@@ -30,10 +30,13 @@
     },
     "plugins": [
       "expo-font",
+      "expo-router",
       "expo-secure-store",
-      "expo-router"
+      "expo-localization"
     ],
     "extra": {
+      "supportsRTL": true,
+      "forcesRTL": true,
       "eas": {
         "projectId": "63016323-4252-4569-9d2a-7e8c6747b488"
       }
