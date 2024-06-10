@@ -22,6 +22,7 @@ const Layout = () => {
   useIsAuthenticated();
   I18nManager.forceRTL(true);
   I18nManager.swapLeftAndRightInRTL(false);
+  // I18nManager
 
   const [fontsLoaded] = useFonts({
     vazirLight: require("../../assets/fonts/Vazirmatn-Light.ttf"),
