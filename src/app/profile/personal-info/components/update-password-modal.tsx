@@ -133,7 +133,7 @@ const UpdatePasswordModal = ({ open, setOpen }: Props) => {
 
       <View className="mt-5">
         <Button loading={loading} onPress={handleSubmit(onSubmit)}>
-          ارسال
+          ثبت
         </Button>
       </View>
     </Modal>

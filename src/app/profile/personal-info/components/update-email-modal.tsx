@@ -75,7 +75,7 @@ const UpdateEmailModal = ({ open, setOpen }: Props) => {
 
       <View className="mt-3">
         <Button loading={loading} onPress={handleSubmit(onSubmit)}>
-          ارسال
+          ثبت
         </Button>
       </View>
     </Modal>

@@ -19,7 +19,12 @@ interface Props {
 }
 
 const Modal = ({ open, setOpen, children, title, hasScrollView = true, description }: Props) => {
-  const ScrollViewComp = hasScrollView ? ScrollView : React.Fragment;
+  const Container = ({ children }: { children: React.ReactNode }) => {
+    if (hasScrollView) {
+      return <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>;
+    }
+    return <React.Fragment>{children}</React.Fragment>;
+  };
 
   return (
     <RNModal animationType="fade" transparent visible={open} onRequestClose={() => setOpen(false)}>
@@ -28,7 +33,7 @@ const Modal = ({ open, setOpen, children, title, hasScrollView = true, descripti
           style={{ width: "100%" }}
           className="rounded-t-2xl border border-gray-300 bg-white px-4 pb-5"
         >
-          <ScrollViewComp showsVerticalScrollIndicator={hasScrollView ? false : undefined}>
+          <Container>
             {/* HEADER */}
             {title && (
               <View className="mb-5 flex-row items-center justify-between border-b border-b-gray-200 py-5">
@@ -55,7 +60,7 @@ const Modal = ({ open, setOpen, children, title, hasScrollView = true, descripti
 
             {/* BODY */}
             {children}
-          </ScrollViewComp>
+          </Container>
         </View>
 
         {/* BLACK BACKGROUND TO CLOSE MODAL */}

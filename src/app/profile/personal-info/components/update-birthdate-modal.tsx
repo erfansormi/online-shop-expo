@@ -135,7 +135,7 @@ const UpdateBirthDateModal = ({ open, setOpen }: Props) => {
 
       <View className="mt-5">
         <Button onPress={onSubmit} loading={loading}>
-          ارسال
+          ثبت
         </Button>
       </View>
     </Modal>

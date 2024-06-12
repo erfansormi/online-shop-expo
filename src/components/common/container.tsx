@@ -28,6 +28,7 @@ const Container = ({
           marginTop: withStatusBarOffset ? StatusBar.currentHeight : 0,
           paddingBottom: withBottomNavigationOffset ? BottomNavigationHeight : 0,
           maxHeight: screenHeight ? screenH : windowHeight ? windowH : "auto",
+          direction: "rtl",
         },
         style,
       ]}
