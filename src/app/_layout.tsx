@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { I18nManager } from "react-native";
-import { Restart } from "fiction-expo-restart";
 import * as SecureStore from "expo-secure-store";
 import ToastProvider from "@/libs/toast-provider";
 import { useIsAuthenticated } from "@/hooks/auth/useIsAuthenticated";
@@ -30,7 +29,6 @@ const Layout = () => {
       I18nManager.allowRTL(true);
       I18nManager.forceRTL(true);
       I18nManager.swapLeftAndRightInRTL(false);
-      Restart();
     }
   }, []);
 
