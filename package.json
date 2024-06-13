@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.3.4",
     "axios": "^1.6.8",
     "expo": "~50.0.19",
+    "expo-app-loading": "^2.1.1",
     "expo-build-properties": "~0.11.1",
     "expo-constants": "~15.4.6",
     "expo-dev-client": "~3.3.12",
