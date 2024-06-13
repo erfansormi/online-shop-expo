@@ -1,10 +1,11 @@
 if (__DEV__) {
   import("../../ReactotronConfig");
 }
-import React from "react";
+import React, { useEffect } from "react";
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { I18nManager } from "react-native";
+import { Restart } from "fiction-expo-restart";
 import * as SecureStore from "expo-secure-store";
 import ToastProvider from "@/libs/toast-provider";
 import { useIsAuthenticated } from "@/hooks/auth/useIsAuthenticated";
@@ -20,9 +21,18 @@ const fetcher = (url: string) => axiosInstance.get(url).then((res) => res.data);
 
 const Layout = () => {
   useIsAuthenticated();
+  I18nManager.allowRTL(true);
   I18nManager.forceRTL(true);
   I18nManager.swapLeftAndRightInRTL(false);
-  // I18nManager
+
+  useEffect(() => {
+    if (!I18nManager.isRTL) {
+      I18nManager.allowRTL(true);
+      I18nManager.forceRTL(true);
+      I18nManager.swapLeftAndRightInRTL(false);
+      Restart();
+    }
+  }, []);
 
   const [fontsLoaded] = useFonts({
     vazirLight: require("../../assets/fonts/Vazirmatn-Light.ttf"),
