@@ -44,7 +44,7 @@ const PersonalInfo = () => {
         {personalInfoItems(user!).map((item) => (
           <View
             key={item.name}
-            className="flex-row items-center justify-between p-5 border-b border-b-gray-200"
+            className="flex-row-reverse items-center justify-between p-5 border-b border-b-gray-200"
           >
             <View className="gap-y-3">
               {/* TITLE */}
@@ -53,7 +53,7 @@ const PersonalInfo = () => {
               </Text>
 
               {/* VALUE */}
-              <View className="flex-row">
+              <View className="flex-row-reverse">
                 <Text>{item.value}</Text>
               </View>
             </View>

@@ -30,7 +30,7 @@ const Shipping = () => {
             </Text>
 
             <TouchableOpacity onPress={() => router.navigate("/checkout/cart")}>
-              <View className="flex-row items-center" style={{ gap: 4 }}>
+              <View className="flex-row-reverse items-center" style={{ gap: 4 }}>
                 <AntDesign name="arrowright" size={20} color="#555" />
                 <Text>سبد خرید</Text>
               </View>
@@ -38,7 +38,7 @@ const Shipping = () => {
           </Card>
 
           {/* SELECTED ADDRESS */}
-          {/* <Card className="bg-white flex-row items-center" style={{ gap: 5 }}>
+          {/* <Card className="bg-white flex-row-reverse items-center" style={{ gap: 5 }}>
             <MaterialCommunityIcons name="map-marker-outline" size={24} color={colors.icon} />
             <View style={{ gap: 5 }}>
               <Text className="text-gray-600" size="sm">
@@ -56,19 +56,19 @@ const Shipping = () => {
 
           {/* PAYMENT INFO */}
           <Card>
-            <View className="flex-row py-2.5 justify-between items-center border-b border-b-gray-300">
+            <View className="flex-row-reverse py-2.5 justify-between items-center border-b border-b-gray-300">
               <Text className="text-gray-500" size="sm">
                 قیمت کالاها ({user?.cart.products_counts})
               </Text>
               <ProductPrice price={user?.cart.products_prices} />
             </View>
-            <View className="flex-row py-2.5 justify-between items-center border-b border-b-gray-300">
+            <View className="flex-row-reverse py-2.5 justify-between items-center border-b border-b-gray-300">
               <Text className="text-gray-500" size="sm">
                 هزینه ارسال
               </Text>
               <ProductPrice price={6} />
             </View>
-            <View className="flex-row py-2.5 justify-between items-center">
+            <View className="flex-row-reverse py-2.5 justify-between items-center">
               <Text className="text-gray-500" size="sm">
                 قابل پرداخت
               </Text>
@@ -82,7 +82,7 @@ const Shipping = () => {
         {/* BOTTOM PAYMENT BUTTONS */}
         <Card
           style={{ height: 90 }}
-          className="flex-row justify-between absolute bottom-0 inset-x-0 border-t border-t-gray-300 items-center"
+          className="flex-row-reverse justify-between absolute bottom-0 inset-x-0 border-t border-t-gray-300 items-center"
         >
           <View className="py-1">
             {deliveryDate && deliveryHour ? (

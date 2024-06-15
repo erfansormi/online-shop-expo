@@ -28,7 +28,7 @@ const Products = () => {
               <ScrollView showsVerticalScrollIndicator={false}>
                 <View className="flex-1" style={{ minHeight: screenHeight }}>
                   <View
-                    className="flex-row flex-wrap"
+                    className="flex-row-reverse flex-wrap"
                     style={{
                       gap: 10,
                       paddingBottom: BottomNavigationHeight + 10,

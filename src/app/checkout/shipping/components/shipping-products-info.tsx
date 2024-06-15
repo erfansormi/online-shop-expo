@@ -19,10 +19,10 @@ const ShippingProductsInfo = () => {
   return (
     <Card style={{ gap: 40 }}>
       {/* HEADER */}
-      <View className="flex-row items-center" style={{ gap: 12 }}>
+      <View className="flex-row-reverse items-center" style={{ gap: 12 }}>
         <MaterialCommunityIcons name="truck-fast-outline" size={35} color={colors.primary} />
         <View>
-          <View className="flex-row items-center" style={{ gap: 6 }}>
+          <View className="flex-row-reverse items-center" style={{ gap: 6 }}>
             <Text>ارسال عادی</Text>
             <Badge style={{ padding: 100 }}>{user?.cart.products_counts} کالا</Badge>
           </View>
@@ -33,7 +33,7 @@ const ShippingProductsInfo = () => {
       </View>
 
       {/* PRODUCTS */}
-      <View className="px-1 flex-row flex-wrap justify-between" style={{ gap: 14 }}>
+      <View className="px-1 flex-row-reverse flex-wrap justify-between" style={{ gap: 14 }}>
         {user?.cart.products.map((item, index) => (
           <View key={item._id} style={{ gap: 10 }}>
             <View>
@@ -49,17 +49,17 @@ const ShippingProductsInfo = () => {
               </Badge>
             </View>
 
-            <View className="justify-center flex-row items-center" style={{ gap: 10 }}>
+            <View className="justify-center flex-row-reverse items-center" style={{ gap: 10 }}>
               {/* SIZE */}
               {item.variant.size && (
-                <View className="flex-row items-center" style={{ gap: 4 }}>
+                <View className="flex-row-reverse items-center" style={{ gap: 4 }}>
                   <Text size="2xs">سایز:</Text>
                   <Text size="xs">{item.variant.size}</Text>
                 </View>
               )}
 
               {/* COLOR */}
-              <View className="flex-row items-center" style={{ gap: 4 }}>
+              <View className="flex-row-reverse items-center" style={{ gap: 4 }}>
                 <ProductColorBadge
                   minimalClassName="w-4 h-4"
                   color={item.variant.color}
@@ -74,14 +74,14 @@ const ShippingProductsInfo = () => {
       </View>
 
       {/* FOOTER */}
-      <View className="flex-row items-center justify-between">
+      <View className="flex-row-reverse items-center justify-between">
         <View style={{ gap: 4 }}>
           {deliveryDate && deliveryHour && (
-            <View className="flex-row items-center" style={{ gap: 10 }}>
+            <View className="flex-row-reverse items-center" style={{ gap: 10 }}>
               <Text className="text-gray-500" size="sm">
                 زمان ارسال
               </Text>
-              <View className="flex-row items-center" style={{ gap: 4 }}>
+              <View className="flex-row-reverse items-center" style={{ gap: 4 }}>
                 <Text size={"sm"}>
                   {Intl.DateTimeFormat("fa", { weekday: "long" }).format(deliveryDate.toDate())}
                 </Text>
@@ -92,7 +92,7 @@ const ShippingProductsInfo = () => {
               </View>
             </View>
           )}
-          <View className="flex-row items-center" style={{ gap: 10 }}>
+          <View className="flex-row-reverse items-center" style={{ gap: 10 }}>
             <Text className="text-gray-500" size="sm">
               هزینه ارسال
             </Text>

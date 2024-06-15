@@ -35,7 +35,7 @@ const ProductDetails = () => {
             >
               <View style={{ gap: 20 }}>
                 {/* BREDCRUMB */}
-                <View className="flex-row" style={{ gap: 4 }}>
+                <View className="flex-row-reverse" style={{ gap: 4 }}>
                   <Text size="sm" className="text-gray-500">
                     بهمان کالا
                   </Text>
@@ -66,9 +66,9 @@ const ProductDetails = () => {
                 </View>
 
                 {/* RATES */}
-                <View className="flex-row items-center" style={{ gap: 15 }}>
+                <View className="flex-row-reverse items-center" style={{ gap: 15 }}>
                   {/* RATES */}
-                  <View className="flex-row items-center" style={{ gap: 4 }}>
+                  <View className="flex-row-reverse items-center" style={{ gap: 4 }}>
                     <MaterialCommunityIcons
                       style={{ marginTop: -3 }}
                       name="star"
@@ -90,7 +90,7 @@ const ProductDetails = () => {
                   <View className="rounded-full bg-gray-300 w-3 h-3 -mt-1" />
 
                   {/* COMMENTS COUNT */}
-                  <View className="flex-row items-center" style={{ gap: 4 }}>
+                  <View className="flex-row-reverse items-center" style={{ gap: 4 }}>
                     <Text size="xs" className="text-cyan-500">
                       {product.comments ? product.comments.length : 0}
                     </Text>

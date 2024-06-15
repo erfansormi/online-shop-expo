@@ -67,7 +67,7 @@ const UpdateNameModal = ({ open, setOpen }: Props) => {
       </View>
 
       <View className="mt-4">
-        <View className="flex-row justify-between">
+        <View className="flex-row-reverse justify-between">
           {/* FIRST NAME */}
           <View style={{ flexBasis: "47%" }}>
             <Controller

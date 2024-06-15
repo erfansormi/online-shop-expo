@@ -21,7 +21,7 @@ const CartPage = () => {
     <>
       <Container withStatusBarOffset style={{ paddingBottom: BottomNavigationHeight + 69 }}>
         <View className="py-2 mb-2 border-b border-gray-200">
-          <View className="flex-row justify-between items-center">
+          <View className="flex-row-reverse justify-between items-center">
             <View>
               <Text className="mb-1">سبد خرید شما</Text>
               <Text size="sm" className="text-gray-500">
@@ -44,7 +44,7 @@ const CartPage = () => {
                 key={item._id}
                 style={{ gap: 16 }}
                 onPress={() => router.navigate(`/products/${product.slug}`)}
-                className="flex border-b border-b-gray-200 flex-row py-4"
+                className="flex border-b border-b-gray-200 flex-row-reverse py-4"
               >
                 <View className="w-1/4">
                   <Image
@@ -59,7 +59,7 @@ const CartPage = () => {
                   <Text size="base">{product.title}</Text>
 
                   {/* COLOR */}
-                  <View className="flex flex-row items-center">
+                  <View className="flex flex-row-reverse items-center">
                     <ProductColorBadge isMinimal color={item.variant.color} />
                     <Text size="sm" className="mr-1 capitalize text-gray-500">
                       {item.variant.color}
@@ -68,7 +68,7 @@ const CartPage = () => {
 
                   {/* SIZE */}
                   {item.variant.size && (
-                    <View className="flex flex-row items-center">
+                    <View className="flex flex-row-reverse items-center">
                       <FontAwesome5 name="ruler" size={20} color="#666" />
                       <Text size="sm" className="mr-1 uppercase text-gray-500">
                         {item.variant.size}
@@ -82,8 +82,7 @@ const CartPage = () => {
                   </View>
 
                   {/* BUTTONS */}
-
-                  <View className="self-end">
+                  <View>
                     <ProductCartButtons
                       requestBody={{
                         productId: product._id,

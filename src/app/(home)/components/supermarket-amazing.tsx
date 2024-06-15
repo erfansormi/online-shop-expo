@@ -7,7 +7,7 @@ import DiscountPercentage from "@/components/common/discount-percentage";
 const SupermarketAmazing = () => {
   return (
     <View className="mx-3 rounded-lg bg-slate-100 p-5">
-      <View className="flex-row items-center">
+      <View className="flex-row-reverse items-center">
         <Image
           width={50}
           height={50}
@@ -16,23 +16,18 @@ const SupermarketAmazing = () => {
             uri: "https://www.digikala.com/statics/img/png/amazing/fresh.webp",
           }}
         />
-        <SvgUri
-          uri={"https://www.digikala.com/statics/img/svg/typography/fresh.svg"}
-        />
+        <SvgUri uri={"https://www.digikala.com/statics/img/svg/typography/fresh.svg"} />
       </View>
 
-      <View className="mt-3 flex-row items-center justify-between">
+      <View className="mt-3 flex-row-reverse items-center justify-between">
         {/* PRODUCTS */}
-        <View className="flex-row">
+        <View className="flex-row-reverse">
           {products.map((item) => (
             <View
               key={item.image}
               className="ml-3 h-[75px] w-[75px] items-center justify-center rounded-full bg-white"
             >
-              <Image
-                className="rounded-full"
-                source={{ uri: item.image, width: 55, height: 55 }}
-              />
+              <Image className="rounded-full" source={{ uri: item.image, width: 55, height: 55 }} />
 
               <View className="absolute bottom-0 right-0">
                 <DiscountPercentage discountPercentage={item.percentage} />

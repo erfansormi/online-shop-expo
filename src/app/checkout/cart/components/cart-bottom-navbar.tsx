@@ -12,7 +12,7 @@ const CartBottomNavbar = () => {
 
   return (
     <View
-      className="flex items-center border-t-2 bg-white border-t-gray-200 flex-row justify-between px-4"
+      className="flex items-center border-t-2 bg-white border-t-gray-200 flex-row-reverse justify-between px-4"
       style={{
         position: "absolute",
         right: 0,

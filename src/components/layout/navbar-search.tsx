@@ -11,13 +11,13 @@ const NavbarSearch = ({
 }) => {
   return (
     <View className="flex-1" style={{ height: windowHeight - 114 }}>
-      <View className="flex-row items-center" style={{ gap: 8 }}>
+      <View className="flex-row-reverse items-center" style={{ gap: 8 }}>
         <TextInput
           autoFocus
           cursorColor={"#888"}
           placeholderTextColor={"#999"}
           placeholder="جستجو در بهمان کالا"
-          className="flex h-10 flex-row justify-center rounded-md bg-gray-200/70 pl-10 pr-3 text-right"
+          className="flex h-10 flex-row-reverse justify-center rounded-md bg-gray-200/70 pl-10 pr-3 text-right"
           style={{
             fontFamily: "vazir",
             paddingHorizontal: 0,

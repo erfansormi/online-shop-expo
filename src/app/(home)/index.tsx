@@ -27,7 +27,7 @@ const Home = () => {
             خطا در دریافت دیتا
           </Text>
           <TouchableNativeFeedback onPress={() => mutate()}>
-            <View className="flex-row" style={{ gap: 6 }}>
+            <View className="flex-row-reverse" style={{ gap: 6 }}>
               <Text className="text-red-500" size="xl">
                 تلاش دوباره
               </Text>

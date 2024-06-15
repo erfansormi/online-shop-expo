@@ -82,7 +82,7 @@ const Login = () => {
               </View>
             </View>
             {/* LINK TO SIGNUP */}
-            <View className="flex-row items-center" style={{ gap: 8 }}>
+            <View className="flex-row-reverse items-center" style={{ gap: 8 }}>
               <Text style={{ fontSize: 15 }}>حساب کاربری ندارید؟</Text>
               <Link
                 href={"/auth/signup"}

@@ -13,7 +13,7 @@ const Navbar = () => {
       <View style={{ marginTop: StatusBar.currentHeight }} className="justify-end px-3 py-2">
         <View className="relative">
           <Pressable onPress={() => setIsOpenModal(true)}>
-            <View className="flex h-10 flex-row justify-between items-center rounded-md bg-gray-200/70 px-4 text-right">
+            <View className="flex h-10 flex-row-reverse justify-between items-center rounded-md bg-gray-200/70 px-4 text-right">
               <Text style={{ color: "#999" }}>جستجو در بهمان کالا</Text>
               <Feather name="search" size={24} color={"#aaa"} />
             </View>

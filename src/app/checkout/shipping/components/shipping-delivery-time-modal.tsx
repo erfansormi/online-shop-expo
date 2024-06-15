@@ -46,7 +46,7 @@ const ShippingSelectDateModal = () => {
       setOpen={setOpen as any}
       title="انتخاب بازه زمانی"
       description={
-        <View className="flex-row items-center" style={{ gap: 8 }}>
+        <View className="flex-row-reverse items-center" style={{ gap: 8 }}>
           <MaterialCommunityIcons name="truck-fast-outline" size={26} color={colors.primary} />
           <Text className="text-gray-500" size="sm">
             ارسال کالاهای معمولی
@@ -62,7 +62,7 @@ const ShippingSelectDateModal = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ width: "100%", direction: "rtl" }}
         >
-          <View className="flex flex-row items-center justify-between">
+          <View className="flex flex-row-reverse items-center justify-between">
             {dates.map((date, i) => (
               <View
                 key={date.day()}
@@ -123,11 +123,11 @@ const ShippingSelectDateModal = () => {
                   }))
                 }
               >
-                <View className="items-center flex-row" style={{ gap: 8 }}>
+                <View className="items-center flex-row-reverse" style={{ gap: 8 }}>
                   <RadioButton
                     isActive={item.value === deliveryHour && deliveryDate?.date() === activeDateTab}
                   />
-                  <View className="flex-row items-center" style={{ gap: 8 }}>
+                  <View className="flex-row-reverse items-center" style={{ gap: 8 }}>
                     <Text size={"sm"}>ساعت</Text>
                     <Text size={"sm"}>{item.title}</Text>
                   </View>

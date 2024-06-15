@@ -59,7 +59,7 @@ const ProductDetailsBottomNavbar = () => {
 
   return (
     <View className="border-t-2 border-t-gray-200 basis-[70px] inset-x-0 ">
-      <View className="flex-row items-center justify-between w-full h-full px-5">
+      <View className="flex-row-reverse items-center justify-between w-full h-full px-5">
         <View style={{ width: 170 }}>
           {!!isProductInCart ? (
             <React.Fragment>
@@ -68,7 +68,7 @@ const ProductDetailsBottomNavbar = () => {
                   {" "}
                 </Button>
               ) : (
-                <View className="w-full flex-row justify-between items-center">
+                <View className="w-full flex-row-reverse justify-between items-center">
                   <Button size="base" onPress={addToCart} style={{ flexBasis: "33.33333%" }}>
                     +
                   </Button>
@@ -88,7 +88,7 @@ const ProductDetailsBottomNavbar = () => {
           )}
         </View>
         <View>
-          <View className="flex-row">
+          <View className="flex-row-reverse">
             <Text>{Number(product?.sellers[0].variants[0].price + "0000").toLocaleString()}</Text>
             <Text size="sm" className="mr-1">
               تومان

@@ -34,7 +34,7 @@ const FavoriteListProductCard = ({
           router.navigate(`/products/${item.slug}`);
         }}
       >
-        <View className="flex-row items-center" style={{ gap: 8 }}>
+        <View className="flex-row-reverse items-center" style={{ gap: 8 }}>
           <View style={{ flexBasis: 120 }}>
             <Image
               width={120}
@@ -51,7 +51,7 @@ const FavoriteListProductCard = ({
 
         <View className="w-full justify-end">
           <View
-            className={`flex-row w-full justify-between ${!item.sellers[0].variants[0]?.discount_percentage && "justify-end"}`}
+            className={`flex-row-reverse w-full justify-between ${!item.sellers[0].variants[0]?.discount_percentage && "justify-end"}`}
           >
             {item.sellers[0].variants[0].discount_percentage && (
               <DiscountPercentage

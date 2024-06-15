@@ -3,7 +3,7 @@ import { Dimensions, Image, View } from "react-native";
 
 const FourthBanner = () => {
   return (
-    <View className="flex-row flex-wrap gap-3 px-3">
+    <View className="flex-row-reverse flex-wrap px-3" style={{ gap: 12 }}>
       <Image
         className="h-44"
         style={{

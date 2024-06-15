@@ -36,7 +36,7 @@ const Modal = ({ open, setOpen, children, title, hasScrollView = true, descripti
           <Container>
             {/* HEADER */}
             {title && (
-              <View className="mb-5 flex-row items-center justify-between border-b border-b-gray-200 py-5">
+              <View className="mb-5 flex-row-reverse items-center justify-between border-b border-b-gray-200 py-5">
                 <View>
                   <Text style={{ fontSize: 15, marginBottom: 6 }}>{title}</Text>
                   {description && typeof description === "string" ? (

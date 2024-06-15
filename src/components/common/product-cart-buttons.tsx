@@ -27,7 +27,7 @@ const ProductCartButtons = ({
               {" "}
             </Button>
           ) : (
-            <View className="w-full flex-row justify-between items-center">
+            <View className="w-full flex-row-reverse justify-between items-center">
               <Button
                 onPress={() => addToCart(requestBody)}
                 style={{ width: 44, height: 44, alignItems: "center" }}

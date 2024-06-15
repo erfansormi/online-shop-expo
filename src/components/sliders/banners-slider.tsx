@@ -45,11 +45,7 @@ const BannersSlider = ({ images }: Props) => {
       >
         {images.map((item) => (
           <View key={item.id} testID={item.id} className="h-full bg-white">
-            <Image
-              alt="تصویر بنر"
-              source={{ uri: item.src }}
-              className="h-full w-screen"
-            />
+            <Image alt="تصویر بنر" source={{ uri: item.src }} className="h-full w-screen" />
           </View>
         ))}
       </Swiper>

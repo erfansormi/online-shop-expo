@@ -46,7 +46,7 @@ const ProductCardV2 = ({ product }: Props) => {
 
         {/* PRICE */}
         <View className="w-full">
-          <View className="w-full flex-row items-center justify-between gap-1 text-3xl">
+          <View className="w-full flex-row-reverse items-center justify-between gap-1 text-3xl">
             {/* PERCENTAGE DISCOUNT */}
             {product.sellers[0].variants[0].discount_percentage ? (
               <View>
@@ -56,7 +56,7 @@ const ProductCardV2 = ({ product }: Props) => {
               </View>
             ) : null}
 
-            <View className="flex-row items-center">
+            <View className="flex-row-reverse items-center">
               <Text fontFamily="vazirBold" className="text-neutral-700">
                 {Number(product.sellers[0].variants[0].price + "0000").toLocaleString("fa")}
               </Text>

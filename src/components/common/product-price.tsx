@@ -27,7 +27,7 @@ const ProductPrice = ({ price, oldPrice, priceSize, oldPriceSize = "sm" }: Props
 
   if (price)
     return (
-      <View className="flex-row items-center">
+      <View className="flex-row-reverse items-center">
         <Text size={priceSize} fontFamily="vazirBold" className="text-neutral-700">
           {Number(price + "0000").toLocaleString("fa")}
         </Text>

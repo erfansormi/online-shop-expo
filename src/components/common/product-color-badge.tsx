@@ -22,7 +22,7 @@ const ProductColorBadge = ({ color, isActive, isMinimal = false, minimalClassNam
   return (
     <View
       style={{ gap: 4 }}
-      className={`rounded-full px-3 py-2 border border-gray-200 flex-row items-center ${isActive && "border-cyan-500 border-2"}`}
+      className={`rounded-full px-3 py-2 border border-gray-200 flex-row-reverse items-center ${isActive && "border-cyan-500 border-2"}`}
     >
       <View
         className={`w-6 h-6 rounded-full border border-gray-300 ${colors[color] ? colors[color] : ""}`}

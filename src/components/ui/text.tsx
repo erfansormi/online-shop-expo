@@ -1,6 +1,6 @@
-import { fontFamilies, fontSizes } from "@/utils/constants/styles";
 import React from "react";
 import { Text as NativeText, TextProps } from "react-native";
+import { fontFamilies, fontSizes } from "@/utils/constants/styles";
 
 interface Props {
   color?: string;
@@ -18,7 +18,11 @@ const Text = ({
   return (
     <NativeText
       style={[
-        { fontFamily, color, fontSize: typeof size === "number" ? size : fontSizes[size] },
+        {
+          fontFamily,
+          color,
+          fontSize: typeof size === "number" ? size : fontSizes[size],
+        },
         style,
       ]}
       {...props}

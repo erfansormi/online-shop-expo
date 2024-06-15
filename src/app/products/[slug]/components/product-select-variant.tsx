@@ -21,7 +21,7 @@ const ProductSelectVariant = () => {
           <View className="mb-1">
             <Text>سایز</Text>
           </View>
-          <View className="flex-row" style={{ gap: 10 }}>
+          <View className="flex-row-reverse" style={{ gap: 10 }}>
             {product.sellers[0].variants.map((item) =>
               item.size ? (
                 <Pressable

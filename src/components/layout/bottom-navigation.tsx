@@ -14,7 +14,7 @@ const BottomNavigation = () => {
       style={{ height: BottomNavigationHeight }}
       className="absolute bottom-0 left-0 right-0 border-t-2 border-t-gray-200 bg-white"
     >
-      <View className="flex-row pt-3">
+      <View className="flex-row-reverse pt-3">
         {tabs(pathname).map((item) => (
           <TouchableOpacity
             key={item.link}

@@ -19,9 +19,9 @@ const ProductDetailsHeader = () => {
   return (
     <View
       style={{ gap: 10 }}
-      className="w-full pt-1 pb-4 border-b border-b-gray-200 items-center mt-1 flex-row justify-between"
+      className="w-full pt-1 pb-4 border-b border-b-gray-200 items-center mt-1 flex-row-reverse justify-between"
     >
-      <View className="flex-row items-center" style={{ gap: 10 }}>
+      <View className="flex-row-reverse items-center" style={{ gap: 10 }}>
         {/* Back Icon */}
         <TouchableOpacity onPress={() => router.back()}>
           <MaterialCommunityIcons name="arrow-right" size={26} color={colors.icon} />
@@ -33,7 +33,7 @@ const ProductDetailsHeader = () => {
         </TouchableOpacity>
       </View>
 
-      <View className="flex-row" style={{ gap: 20 }}>
+      <View className="flex-row-reverse" style={{ gap: 20 }}>
         {/* CART ICON */}
         <TouchableOpacity onPress={() => router.navigate("/checkout/cart")}>
           <MaterialCommunityIcons name="cart-outline" size={24} color={colors.icon} />

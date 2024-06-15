@@ -13,7 +13,7 @@ const Card = ({ style, isEmpty, emptyTitle, ...props }: ViewProps & Props) => {
       {isEmpty ? (
         <View className="min-h-[120px]">
           {emptyTitle && <Text>{emptyTitle}</Text>}
-          <View className="items-center grow justify-center flex-row" style={{ gap: 8 }}>
+          <View className="items-center grow justify-center flex-row-reverse" style={{ gap: 8 }}>
             <MaterialIcons name="search-off" size={30} color={"rgb(107 114 128)"} />
             <Text className="text-gray-500">موردی برای نمایش وجود ندارد!</Text>
           </View>

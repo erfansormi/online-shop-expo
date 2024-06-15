@@ -7,12 +7,7 @@ import { Controller } from "react-hook-form";
 import { useSignup } from "@/hooks/auth/useSignup";
 import { SignupSchemaData } from "@/utils/schemas";
 import Container from "@/components/common/container";
-import {
-  KeyboardAvoidingView,
-  ScrollView,
-  TextInput,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, ScrollView, TextInput, View } from "react-native";
 
 const Signup = () => {
   const { form, loading, onSubmit } = useSignup();
@@ -46,21 +41,11 @@ const Signup = () => {
 
   return (
     <Container className="flex-1" screenHeight>
-      <KeyboardAvoidingView
-        behavior={"padding"}
-        className="flex-1 justify-center"
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps={"handled"}
-        >
+      <KeyboardAvoidingView behavior={"padding"} className="flex-1 justify-center">
+        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"handled"}>
           <View className="h-screen justify-center">
             {/* TITLE */}
-            <Text
-              size="3xl"
-              fontFamily="vazirBold"
-              className="text-center text-rose-600"
-            >
+            <Text size="3xl" fontFamily="vazirBold" className="text-center text-rose-600">
               بهمان کالا
             </Text>
 
@@ -77,8 +62,7 @@ const Signup = () => {
                     control={control}
                     rules={{
                       validate: () =>
-                        form.watch("password") ===
-                          form.watch("confirmPassword") ||
+                        form.watch("password") === form.watch("confirmPassword") ||
                         "رمز عبور های وارد شده یکسان نیستند!",
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
@@ -91,25 +75,16 @@ const Signup = () => {
                         placeholder={input.placeholder}
                         ref={inputRefs[input.name]}
                         autoComplete={input.autoComplete}
-                        onSubmitEditing={() =>
-                          nextInputRefs[input.name]?.current?.focus()
-                        }
-                        returnKeyType={
-                          nextInputRefs[input.name] ? "next" : "done"
-                        }
-                        inputMode={
-                          input.autoComplete === "email" ? "email" : "text"
-                        }
-                        secureTextEntry={
-                          input.autoComplete === "new-password" ? true : false
-                        }
+                        onSubmitEditing={() => nextInputRefs[input.name]?.current?.focus()}
+                        returnKeyType={nextInputRefs[input.name] ? "next" : "done"}
+                        inputMode={input.autoComplete === "email" ? "email" : "text"}
+                        secureTextEntry={input.autoComplete === "new-password" ? true : false}
                         multiline={true}
                         numberOfLines={1}
                         blurOnSubmit={true}
                         error={
                           (errors[input.name] && errors[input.name]?.message) ||
-                          (form.watch("confirmPassword") !==
-                            form.watch("password") &&
+                          (form.watch("confirmPassword") !== form.watch("password") &&
                           input.name === "confirmPassword" &&
                           form.formState.submitCount > 0
                             ? "رمز عبور های وارد شده یکسان نیستند!"
@@ -123,7 +98,7 @@ const Signup = () => {
             </View>
 
             {/* LINK TO LOGIN */}
-            <View className="flex-row pt-3 items-center" style={{ gap: 8 }}>
+            <View className="flex-row-reverse pt-3 items-center" style={{ gap: 8 }}>
               <Text style={{ fontSize: 15 }}>حساب کاربری دارید؟</Text>
               <Link
                 href={"/auth/login"}

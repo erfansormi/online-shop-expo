@@ -23,11 +23,11 @@ const ProductCard = ({ index, product, productsLength }: Props) => {
       style={{
         flexBasis: 150,
         overflow: "hidden",
-        marginEnd: index + 1 === productsLength ? 10 : 4,
-        borderBottomStartRadius: index === 0 ? 10 : 2,
-        borderTopStartRadius: index === 0 ? 10 : 2,
-        borderBottomEndRadius: index + 1 === productsLength ? 10 : 2,
-        borderTopEndRadius: index + 1 === productsLength ? 10 : 2,
+        marginStart: index + 1 === productsLength ? 10 : 4,
+        borderBottomEndRadius: index === 0 ? 10 : 2,
+        borderTopEndRadius: index === 0 ? 10 : 2,
+        borderBottomStartRadius: index + 1 === productsLength ? 10 : 2,
+        borderTopStartRadius: index + 1 === productsLength ? 10 : 2,
       }}
     >
       <View className="flex-col items-center justify-center gap-y-4 bg-white px-3 pb-6 pt-4">
@@ -50,7 +50,7 @@ const ProductCard = ({ index, product, productsLength }: Props) => {
         {/* PRICE */}
         <View className="w-full h-10">
           <View
-            className={`w-full flex-row items-center gap-1 text-3xl ${product.sellers[0].variants[0].discount_percentage ? "justify-between" : "justify-end"}`}
+            className={`w-full flex-row-reverse items-center gap-1 text-3xl ${product.sellers[0].variants[0].discount_percentage ? "justify-between" : "justify-end"}`}
           >
             {/* PERCENTAGE DISCOUNT */}
             {product.sellers[0].variants[0].discount_percentage ? (

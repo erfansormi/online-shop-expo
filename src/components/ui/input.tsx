@@ -28,7 +28,7 @@ const Input = forwardRef<TextInput, Props & TextInputProps>(
     return (
       <View>
         {label && (
-          <View className="flex-row items-center gap-x-1">
+          <View className="flex-row-reverse items-center" style={{ gap: 4 }}>
             <Text size="sm" className="mb-1">
               {label}
             </Text>

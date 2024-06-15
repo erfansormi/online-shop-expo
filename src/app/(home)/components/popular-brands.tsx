@@ -8,6 +8,7 @@ const PopularBrands = () => {
     <View className="mb-5">
       <SectionTitle title="محبوب ترین برندها" />
       <FlatList
+        inverted
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={Separator}

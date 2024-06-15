@@ -18,14 +18,14 @@ const ProfilePanel = () => {
     <View className="mb-5 rounded-lg border border-gray-200 pt-3">
       {/* USER DETAILS */}
       <View className="px-3" style={{ gap: 8 }}>
-        <View>
+        <View className="flex-row-reverse">
           <View className="h-14 w-14 items-center justify-center rounded-full bg-gray-300 p-2">
             <FontAwesome5 name="user-alt" size={30} color="#fff" />
           </View>
         </View>
 
         {/* FULL NAME */}
-        <View className="mt-1 flex-row" style={{ gap: 8 }}>
+        <View className="mt-1 flex-row-reverse" style={{ gap: 8 }}>
           <Text fontFamily="vazirBold" className="capitalize">
             {user.first_name}
           </Text>
@@ -35,7 +35,7 @@ const ProfilePanel = () => {
         </View>
 
         {/* EMAIL */}
-        <View className="flex-row">
+        <View className="flex-row-reverse">
           <Text size="sm" className="text-gray-500">
             {user.email}
           </Text>
@@ -52,7 +52,7 @@ const ProfilePanel = () => {
           >
             <View
               style={{ gap: 6 }}
-              className={`flex-row items-center border-t border-t-gray-200 py-4 pl-2 pr-5 ${route.name.match(item.link) && "rounded-r-md border-r-4 border-r-rose-500"}`}
+              className={`flex-row-reverse items-center border-t border-t-gray-200 py-4 pl-2 pr-5 ${route.name.match(item.link) && "rounded-r-md border-r-4 border-r-rose-500"}`}
             >
               <View className="w-7 items-center">{item.icon}</View>
               <Text size="sm">{item.text}</Text>
@@ -67,7 +67,7 @@ const ProfilePanel = () => {
         >
           <View
             style={{ gap: 6 }}
-            className="flex-row items-center border-t border-t-gray-200 py-4 pl-2 pr-5"
+            className="flex-row-reverse items-center border-t border-t-gray-200 py-4 pl-2 pr-5"
           >
             <View className="w-7 items-center">
               <Ionicons name="exit-outline" size={24} color="#222" />

@@ -14,8 +14,9 @@ const ProductsSlider = ({ products, hasFirstBrandSlide = true }: Props) => {
   return (
     <View className="bg-primary pr-2 py-2">
       <FlatList
+        inverted
         horizontal
-        data={products}
+        data={products.map((item, index) => ({ ...item, index }))}
         decelerationRate={0.8}
         keyExtractor={(item, index) => item._id + index}
         showsHorizontalScrollIndicator={false}
@@ -48,7 +49,10 @@ const ProductsSlider = ({ products, hasFirstBrandSlide = true }: Props) => {
                       className="h-32 w-32"
                     />
                   </View>
-                  <View style={{ marginRight: 12 }} className="flex-row items-center gap-x-1">
+                  <View
+                    style={{ marginRight: 12 }}
+                    className="flex-row-reverse items-center gap-x-1"
+                  >
                     <Text size="xs" color="#fff" fontFamily="vazirBold">
                       مشاهده همه
                     </Text>
