@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Hr from "@/components/ui/hr";
 import Text from "@/components/ui/text";
 import { useLocalSearchParams } from "expo-router";
@@ -6,17 +6,19 @@ import Container from "@/components/common/container";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import LoadingScreen from "@/components/common/loading-screen";
 import ProductsSlider from "@/components/sliders/products-slider";
-import { Image, ScrollView, View } from "react-native";
+import { Image, RefreshControl, ScrollView, View } from "react-native";
 import ProductDetailsHeader from "./components/product-details-header";
 import { useProductDetails, useProducts } from "@/hooks/fetching/products";
 import ProductDetailsBottomNavbar from "./components/product-details-bottom-navbar";
 import ProductSelectVariant from "./components/product-select-variant";
+import RTLScrollView from "@/components/ui/rtl-scrollview";
 
 const ProductDetails = () => {
   const { slug } = useLocalSearchParams();
-  const { data, isLoading } = useProductDetails(slug as string);
+  const { data, isLoading, mutate } = useProductDetails(slug as string);
   const product = data?.product;
   const products = useProducts();
+  const [refreshing, setRefreshing] = useState(false);
 
   return (
     <View className="flex-1">
@@ -32,6 +34,17 @@ const ProductDetails = () => {
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{ flexGrow: 1, paddingBottom: 40 }}
               style={{ paddingTop: 20 }}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={() => {
+                    setRefreshing(true);
+                    mutate().finally(() => {
+                      setRefreshing(false);
+                    });
+                  }}
+                />
+              }
             >
               <View style={{ gap: 20 }}>
                 {/* BREDCRUMB */}
@@ -101,10 +114,10 @@ const ProductDetails = () => {
                 </View>
 
                 {/* ATTRIBUTES */}
-                <ScrollView
+                <RTLScrollView
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{ gap: 10 }}
+                  contentContainerStyle={{ gap: 10, flexDirection: "row-reverse" }}
                 >
                   {product.attributes.map((item) => (
                     <View key={item._id} className="px-3 py-1 bg-gray-200/60 rounded-lg">
@@ -116,7 +129,7 @@ const ProductDetails = () => {
                       </Text>
                     </View>
                   ))}
-                </ScrollView>
+                </RTLScrollView>
 
                 <View className="my-2">
                   <Hr />

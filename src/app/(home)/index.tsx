@@ -1,3 +1,6 @@
+import useSWR from "swr";
+import { useState } from "react";
+import Text from "@/components/ui/text";
 import Hr from "../../components/ui/hr";
 import TopBanners from "./components/top-banners";
 import Navbar from "../../components/layout/navbar";
@@ -5,18 +8,18 @@ import FourthBanner from "./components/fourth-banner";
 import { MainPageResponse } from "../../types/main-page";
 import { Ionicons } from "@expo/vector-icons";
 import ProductsSlider from "../../components/sliders/products-slider";
-import { Pressable, ScrollView, TouchableNativeFeedback, View } from "react-native";
 import SupermarketAmazing from "./components/supermarket-amazing";
 import MainCategories from "./components/main-categories";
 import PopularBrands from "./components/popular-brands";
 import BottomNavigation from "@/components/layout/bottom-navigation";
 import LoadingScreen from "@/components/common/loading-screen";
 import { BottomNavigationHeight } from "@/utils/constants/styles";
-import useSWR from "swr";
-import Text from "@/components/ui/text";
+import { RefreshControl, ScrollView, TouchableNativeFeedback, View } from "react-native";
 
 const Home = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const { data, error, isLoading, mutate } = useSWR<MainPageResponse>("/api/v1/home-data");
+
   return (
     <>
       {isLoading ? (
@@ -40,7 +43,20 @@ const Home = () => {
           <View className="flex-1">
             <Navbar />
 
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={() => {
+                    setRefreshing(true);
+                    mutate().finally(() => {
+                      setRefreshing(false);
+                    });
+                  }}
+                />
+              }
+            >
               <View style={{ paddingBottom: BottomNavigationHeight, gap: 12 }}>
                 <View className="mt-1">
                   <Hr />

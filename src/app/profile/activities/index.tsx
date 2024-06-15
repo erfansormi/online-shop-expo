@@ -8,9 +8,12 @@ import LoadingScreen from "@/components/common/loading-screen";
 import { Dimensions, Image, Pressable, View } from "react-native";
 import DiscountPercentage from "@/components/common/discount-percentage";
 import { useActivitiesApi } from "@/hooks/fetching/profile";
+import { Product } from "@/types/main-page";
 
 const RecentVisits = () => {
   const { data, isLoading } = useActivitiesApi();
+  const reversedData: Product[] = [];
+  data?.recentVisits.forEach((item) => reversedData.push(item));
 
   return (
     <>
@@ -23,7 +26,7 @@ const RecentVisits = () => {
               اخرین بازدیدها
             </Text>
 
-            {data?.recentVisits.reverse().map((item, index) => (
+            {reversedData.map((item, index) => (
               <Pressable
                 key={item._id + index}
                 onPress={() => {
@@ -31,7 +34,7 @@ const RecentVisits = () => {
                 }}
               >
                 <View
-                  className={`border-b border-b-gray-300 py-5 ${data.recentVisits.length === index + 1 && "border-b-0"}`}
+                  className={`border-b border-b-gray-300 py-5 ${reversedData.length === index + 1 && "border-b-0"}`}
                   style={{ gap: 12 }}
                 >
                   <View className="flex-row-reverse items-center" style={{ gap: 8 }}>

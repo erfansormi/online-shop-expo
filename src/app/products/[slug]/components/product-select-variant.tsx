@@ -1,4 +1,5 @@
 import ProductColorBadge from "@/components/common/product-color-badge";
+import RTLScrollView from "@/components/ui/rtl-scrollview";
 import Text from "@/components/ui/text";
 import { useProductDetails } from "@/hooks/fetching/products";
 import { useProductStore } from "@/store/product-store";
@@ -52,10 +53,10 @@ const ProductSelectVariant = () => {
           <Text>رنگ</Text>
         </View>
 
-        <ScrollView
+        <RTLScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ gap: 6 }}
+          contentContainerStyle={{ gap: 6, flexDirection: "row-reverse" }}
         >
           {product?.sellers[0].variants[0].colors.map((item) => (
             <Pressable
@@ -75,7 +76,7 @@ const ProductSelectVariant = () => {
               />
             </Pressable>
           ))}
-        </ScrollView>
+        </RTLScrollView>
       </View>
     </>
   );

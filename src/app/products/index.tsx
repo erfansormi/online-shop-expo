@@ -1,7 +1,7 @@
 import useSWR from "swr";
-import React from "react";
+import React, { useState } from "react";
 import { Product } from "@/types/main-page";
-import { ScrollView, View } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 import Navbar from "@/components/layout/navbar";
 import Container from "@/components/common/container";
 import LoadingScreen from "@/components/common/loading-screen";
@@ -11,7 +11,8 @@ import { screenHeight } from "@/utils/dimensions";
 import { BottomNavigationHeight } from "@/utils/constants/styles";
 
 const Products = () => {
-  const { data, error, isLoading } = useSWR<{
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, error, isLoading, mutate } = useSWR<{
     success: boolean;
     products: Product[];
   }>("/api/v1/products");
@@ -25,7 +26,20 @@ const Products = () => {
           <>
             <Navbar />
             <Container screenHeight>
-              <ScrollView showsVerticalScrollIndicator={false}>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={() => {
+                      setRefreshing(true);
+                      mutate().finally(() => {
+                        setRefreshing(false);
+                      });
+                    }}
+                  />
+                }
+              >
                 <View className="flex-1" style={{ minHeight: screenHeight }}>
                   <View
                     className="flex-row-reverse flex-wrap"

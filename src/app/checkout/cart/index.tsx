@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { router } from "expo-router";
 import Text from "@/components/ui/text";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useCartStore } from "@/store/cart-store";
 import Container from "@/components/common/container";
-import { Image, Pressable, ScrollView, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
 import CartBottomNavbar from "./components/cart-bottom-navbar";
 import BottomNavigation from "@/components/layout/bottom-navigation";
 import ProductColorBadge from "@/components/common/product-color-badge";
@@ -13,9 +13,16 @@ import ProductCartButtons from "@/components/common/product-cart-buttons";
 import { BottomNavigationHeight, colors } from "@/utils/constants/styles";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Card from "@/components/ui/card";
+import { getUserInfo } from "@/services/auth";
+import { useUserStore } from "@/store/user-store";
+import { AxiosError } from "axios";
+import reactotron from "reactotron-react-native";
 
 const CartPage = () => {
   const cart = useCartStore();
+  const cartSetter = useCartStore.setState;
+  const { setUser } = useUserStore();
+  const [refreshing, setRefreshing] = useState(false);
 
   return (
     <>
@@ -35,7 +42,36 @@ const CartPage = () => {
           </View>
         </View>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => {
+                setRefreshing(true);
+                const fetchData = async () => {
+                  await getUserInfo()
+                    .then((res) => {
+                      setUser(res.data);
+                      cartSetter(res.data.cart as any);
+                    })
+                    .catch((err: AxiosError<any>) => {
+                      reactotron.log(err.response?.data);
+
+                      setUser(null);
+                      router.navigate("/auth/login");
+                      return;
+                    })
+                    .finally(() => {
+                      setRefreshing(false);
+                    });
+                };
+
+                fetchData();
+              }}
+            />
+          }
+        >
           {!cart?.products?.length ? (
             <Card isEmpty emptyTitle="سبد خرید" />
           ) : (
